@@ -1,0 +1,13 @@
+com\EnderFire\PALogisticsDesk\Controls\PedidosJpaController.class
+com\EnderFire\PALogisticsDesk\Models\Pedidos.class
+com\EnderFire\PALogisticsDesk\Models\Client_.class
+com\EnderFire\PALogisticsDesk\exceptions\NonexistentEntityException.class
+com\EnderFire\PALogisticsDesk\Models\Proveedor.class
+com\EnderFire\PALogisticsDesk\Models\Pedidos_.class
+com\EnderFire\PALogisticsDesk\PALogisticsDesk.class
+com\EnderFire\PALogisticsDesk\exceptions\IllegalOrphanException.class
+com\EnderFire\PALogisticsDesk\Controls\ClientJpaController.class
+com\EnderFire\PALogisticsDesk\Models\Proveedor_.class
+com\EnderFire\PALogisticsDesk\exceptions\PreexistingEntityException.class
+com\EnderFire\PALogisticsDesk\Controls\ProveedorJpaController.class
+com\EnderFire\PALogisticsDesk\Models\Client.class
