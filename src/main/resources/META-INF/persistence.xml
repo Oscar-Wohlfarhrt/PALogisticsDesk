@@ -4,7 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.EnderFire.PALogisticsDesk.Models.Client</class>
     <class>com.EnderFire.PALogisticsDesk.Models.Proveedor</class>
-    <class>com.EnderFire.PALogisticsDesk.Models.Pedidos</class>
+    <class>com.EnderFire.PALogisticsDesk.Models.Pedido</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost\MSSQLSERVER:1433;databaseName=DBPATPI;encrypt=false"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>

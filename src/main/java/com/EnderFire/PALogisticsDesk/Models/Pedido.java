@@ -5,26 +5,23 @@
 package com.EnderFire.PALogisticsDesk.Models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.PersistenceProperty;
-import org.eclipse.persistence.annotations.CascadeOnDelete;
+import javax.persistence.ManyToOne;
+import org.eclipse.persistence.annotations.ReadOnly;
 
 /**
  *
  * @author Oscar2
  */
 @Entity
-public class Client implements Serializable {
+public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -33,10 +30,12 @@ public class Client implements Serializable {
     
     @Column(name = "Nombre")
     private String name;
-    
-    @OneToMany(mappedBy = "Client", cascade = CascadeType.ALL)
-    private List<Pedido> pedidos;
 
+    //@Column(name = "Cliente")
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name="Client_id")
+    private Client client;
+    
     public Long getId() {
         return id;
     }
@@ -53,12 +52,14 @@ public class Client implements Serializable {
         this.name = name;
     }
 
-    public List<Pedido> getPedidos() {
-        if (pedidos == null)
-            pedidos = new ArrayList<>();
-        
-        return pedidos;
+    public Client getClient() {
+        return client;
     }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+    
 
     @Override
     public int hashCode() {
@@ -70,10 +71,10 @@ public class Client implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Client)) {
+        if (!(object instanceof Pedido)) {
             return false;
         }
-        Client other = (Client) object;
+        Pedido other = (Pedido) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -82,7 +83,7 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.Client[ id=" + id + " ]";
+        return "com.EnderFire.PALogisticsDesk.Models.Pedidos[ id=" + id + " ]";
     }
     
 }

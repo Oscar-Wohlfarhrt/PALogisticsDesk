@@ -22,7 +22,7 @@ public class PALogisticsDesk {
         Client test = new Client();
         test.setId(1L);
         test.setName("Oscar Wohlfarhrt 4");
-        Pedidos ped = new Pedidos();
+        Pedido ped = new Pedido();
         ped.setName("Pedido 3");
         ped.setClient(test);
         //ped.setId(1L);
@@ -30,12 +30,12 @@ public class PALogisticsDesk {
         Client test2 = new Client();
         test2.setId(2L);
         test2.setName("Oscar Wohlfarhrt 5");
-        Pedidos ped2 = new Pedidos();
+        Pedido ped2 = new Pedido();
         ped2.setName("Pedido 4");
         ped2.setClient(test2);
         //ped.setId(1L);
         test2.getPedidos().add(ped2);
-        ped2 = new Pedidos();
+        ped2 = new Pedido();
         ped2.setName("Pedido 20");
         ped2.setClient(test2);
         //ped.setId(1L);

@@ -5,37 +5,23 @@
 package com.EnderFire.PALogisticsDesk.Models;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import org.eclipse.persistence.annotations.ReadOnly;
 
 /**
  *
  * @author Oscar2
  */
 @Entity
-public class Pedidos implements Serializable {
+public class Inventario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @Column(name = "Nombre")
-    private String name;
 
-    //@Column(name = "Cliente")
-    @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name="Client_id")
-    private Client client;
-    
     public Long getId() {
         return id;
     }
@@ -43,23 +29,6 @@ public class Pedidos implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-    
 
     @Override
     public int hashCode() {
@@ -71,10 +40,10 @@ public class Pedidos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Pedidos)) {
+        if (!(object instanceof Inventario)) {
             return false;
         }
-        Pedidos other = (Pedidos) object;
+        Inventario other = (Inventario) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -83,7 +52,7 @@ public class Pedidos implements Serializable {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.Pedidos[ id=" + id + " ]";
+        return "com.EnderFire.PALogisticsDesk.Models.Inventario[ id=" + id + " ]";
     }
     
 }
