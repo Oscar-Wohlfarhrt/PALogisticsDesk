@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 /**
@@ -21,9 +22,24 @@ public class DynamicTable<T> {
     }
     
     public void setJTableModels(JTable jTable){
-        DefaultTableModel tModel = (DefaultTableModel)jTable.getModel();
         TableColumnModel cModel = jTable.getColumnModel();
         
+        TableHeader[] headers = (TableHeader[])getTableHeadersAnnotation().toArray();
+        
+        for(TableHeader header:headers){
+            TableColumn tCol = cModel.getColumn(0);
+            tCol.setHeaderValue(header.name());
+            if(header.columnSize()>0)
+                tCol.setWidth(header.columnSize());
+            switch(header.columnType()){
+                case ColumnType.COMBOBOX:
+                    break;
+                case ColumnType.CHECKBOX:
+                    break;
+                default:
+                    break;
+            }
+        }
         
     }
     
