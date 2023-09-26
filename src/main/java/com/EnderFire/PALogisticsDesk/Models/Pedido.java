@@ -31,9 +31,7 @@ public class Pedido implements Serializable {
     @Column(name = "Nombre")
     private String name;
 
-    //@Column(name = "Cliente")
     @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name="Client_id")
     private Client client;
     
     public Long getId() {

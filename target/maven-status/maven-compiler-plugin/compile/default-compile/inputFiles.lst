@@ -1,5 +1,6 @@
 D:\BeansProjects\TPI\PALogisticsDesk\src\main\java\com\EnderFire\PALogisticsDesk\Models\Ruta.java
 D:\BeansProjects\TPI\PALogisticsDesk\src\main\java\com\EnderFire\PALogisticsDesk\Models\Transportista.java
+D:\BeansProjects\TPI\PALogisticsDesk\src\main\java\com\EnderFire\PALogisticsDesk\Views\TableViewForm.java
 D:\BeansProjects\TPI\PALogisticsDesk\src\main\java\com\EnderFire\PALogisticsDesk\Models\Ubicacion.java
 D:\BeansProjects\TPI\PALogisticsDesk\src\main\java\com\EnderFire\PALogisticsDesk\Models\Pedido.java
 D:\BeansProjects\TPI\PALogisticsDesk\src\main\java\com\EnderFire\PALogisticsDesk\Models\Proveedor.java
@@ -16,5 +17,6 @@ D:\BeansProjects\TPI\PALogisticsDesk\src\main\java\com\EnderFire\PALogisticsDesk
 D:\BeansProjects\TPI\PALogisticsDesk\src\main\java\com\EnderFire\PALogisticsDesk\Models\Inventario.java
 D:\BeansProjects\TPI\PALogisticsDesk\src\main\java\com\EnderFire\PALogisticsDesk\Models\RendimientoProveedor.java
 D:\BeansProjects\TPI\PALogisticsDesk\src\main\java\com\EnderFire\PALogisticsDesk\exceptions\NonexistentEntityException.java
+D:\BeansProjects\TPI\PALogisticsDesk\src\main\java\com\EnderFire\PALogisticsDesk\Views\MainForm.java
 D:\BeansProjects\TPI\PALogisticsDesk\src\main\java\com\EnderFire\PALogisticsDesk\Models\Contrato.java
 D:\BeansProjects\TPI\PALogisticsDesk\src\main\java\com\EnderFire\PALogisticsDesk\Models\Client.java

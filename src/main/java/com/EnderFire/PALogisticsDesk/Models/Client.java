@@ -35,7 +35,10 @@ public class Client implements Serializable {
     private String name;
     
     @OneToMany(mappedBy = "Client", cascade = CascadeType.ALL)
-    private List<Pedido> pedidos;
+    List<Preferencia> preferencias = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "Client", cascade = CascadeType.ALL)
+    private List<Pedido> pedidos = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -53,10 +56,7 @@ public class Client implements Serializable {
         this.name = name;
     }
 
-    public List<Pedido> getPedidos() {
-        if (pedidos == null)
-            pedidos = new ArrayList<>();
-        
+    public List<Pedido> getPedidos() {        
         return pedidos;
     }
 
