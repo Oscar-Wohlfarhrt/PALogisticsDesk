@@ -21,6 +21,7 @@ public class Ruta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String description;
 
     public Long getId() {
         return id;

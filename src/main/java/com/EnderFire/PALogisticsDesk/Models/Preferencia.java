@@ -23,6 +23,7 @@ public class Preferencia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Client client;

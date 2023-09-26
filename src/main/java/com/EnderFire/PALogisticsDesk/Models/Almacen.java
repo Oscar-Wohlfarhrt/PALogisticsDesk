@@ -21,6 +21,7 @@ public class Almacen implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String name;
 
     public Long getId() {
         return id;

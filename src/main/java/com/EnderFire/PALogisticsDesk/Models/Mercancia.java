@@ -21,6 +21,8 @@ public class Mercancia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String descirption;
+    private float value;
 
     public Long getId() {
         return id;

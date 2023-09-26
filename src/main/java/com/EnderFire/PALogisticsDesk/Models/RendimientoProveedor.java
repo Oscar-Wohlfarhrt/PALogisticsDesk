@@ -21,6 +21,9 @@ public class RendimientoProveedor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private float productQuality;
+    private float inTimeP;//P=porcentaje
+    private float deliveryErrorsP;//P=porcentaje
 
     public Long getId() {
         return id;

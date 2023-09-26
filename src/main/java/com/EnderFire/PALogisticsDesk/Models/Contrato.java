@@ -21,6 +21,8 @@ public class Contrato implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    //private ???? partsInvolved; ArrayList<>????
+    private String description;
 
     public Long getId() {
         return id;

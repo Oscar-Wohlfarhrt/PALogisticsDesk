@@ -30,6 +30,8 @@ public class Pedido implements Serializable {
     
     @Column(name = "Nombre")
     private String name;
+    private int state;
+    private int deliveryAddress;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Client client;

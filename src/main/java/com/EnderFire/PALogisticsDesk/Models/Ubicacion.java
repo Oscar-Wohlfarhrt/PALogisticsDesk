@@ -21,6 +21,9 @@ public class Ubicacion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String name;
+    private String latitude; //revisar el tipo de dato. Por la naturaleza de la coordenada hay que especificar si es norte o sur y expresarse en grados sexagesimales con sus minutos y segundos respectivos
+    private String longitude;//revisar el tipo de dato
 
     public Long getId() {
         return id;
