@@ -6,6 +6,9 @@ package com.EnderFire.PALogisticsDesk.Utils;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
+import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -22,24 +25,45 @@ public class DynamicTable<T> {
     }
     
     public void setJTableModels(JTable jTable){
-        TableColumnModel cModel = jTable.getColumnModel();
-        
+              
         TableHeader[] headers = (TableHeader[])getTableHeadersAnnotation().toArray();
-        
+        String[] hNames = Arrays.stream(headers).map((h)->h.name()).toArray(String[]::new);
+        System.out.println("Headers: "+String.join("; ", ));
+        /*TableColumnModel cModel = jTable.getColumnModel();
+        int i =0;
         for(TableHeader header:headers){
-            TableColumn tCol = cModel.getColumn(0);
+            while(cModel.getColumnCount()<=i)
+                cModel.addColumn(new TableColumn());
+            
+            TableColumn tCol = cModel.getColumn(i);
             tCol.setHeaderValue(header.name());
             if(header.columnSize()>0)
                 tCol.setWidth(header.columnSize());
+            JComboBox<String> ops = new JComboBox<>(){
+                @Override
+                public String toString(){
+                    return getSelectedItem().toString();
+                }
+            };
             switch(header.columnType()){
                 case ColumnType.COMBOBOX:
+                    DefaultComboBoxModel<String> boxModel = new DefaultComboBoxModel<>();
+                    
+                    boxModel.addElement("Masculino");
+                    boxModel.addElement("Femenino");
+                    
+                    ops.setModel(boxModel);
+                    tCol.setCellEditor(new DefaultCellEditor(ops));
                     break;
                 case ColumnType.CHECKBOX:
                     break;
                 default:
                     break;
             }
+            i++;
         }
+            while(cModel.getColumnCount()>=i)
+                cModel.removeColumn(cModel.getColumn(i));*/
         
     }
     
