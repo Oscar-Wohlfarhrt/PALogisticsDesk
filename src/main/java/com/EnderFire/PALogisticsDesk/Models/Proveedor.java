@@ -23,6 +23,10 @@ public class Proveedor implements Serializable {
     private Long id;
     private String name;
     private String productBrand;
+    private InformacionContacto ci;
+    private Contrato contract;
+    private RendimientoProveedor pr;
+    private OrdenCompra po;
 
     public Long getId() {
         return id;
