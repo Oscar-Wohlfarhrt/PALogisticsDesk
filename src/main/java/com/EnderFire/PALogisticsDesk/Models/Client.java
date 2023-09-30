@@ -4,6 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +28,12 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @TableHeader(name = "DNI")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @TableHeader(name = "Nombre")
     @Column(name = "Nombre")
     private String name;
     
