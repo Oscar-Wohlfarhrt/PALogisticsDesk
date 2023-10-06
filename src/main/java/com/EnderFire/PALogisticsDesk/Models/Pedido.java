@@ -4,6 +4,8 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.ColumnType;
+import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,11 +28,14 @@ public class Pedido implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableHeader(name = "ID")
     private Long id;
     
     @Column(name = "Nombre")
     private String name;
+    @TableHeader(name = "Estado",columnType = ColumnType.COMBOBOX,enumClass = EstadosPedido.class)
     private int state;
+    @TableHeader(name = "Direccion de entrega")
     private int deliveryAddress;
 
     @ManyToOne(fetch = FetchType.LAZY)

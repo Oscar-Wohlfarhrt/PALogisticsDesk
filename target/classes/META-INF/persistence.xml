@@ -15,6 +15,8 @@
     <class>com.EnderFire.PALogisticsDesk.Models.Mercancia</class>
     <class>com.EnderFire.PALogisticsDesk.Models.Contrato</class>
     <class>com.EnderFire.PALogisticsDesk.Models.RendimientoProveedor</class>
+    <class>com.EnderFire.PALogisticsDesk.Models.InformacionContacto</class>
+    <class>com.EnderFire.PALogisticsDesk.Models.CentroDistribucion</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost\MSSQLSERVER:1433;databaseName=DBPATPI;encrypt=false"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>

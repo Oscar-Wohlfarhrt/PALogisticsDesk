@@ -28,13 +28,14 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @TableHeader(name = "DNI")
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableHeader(name = "DNI")
     private Long id;
     
-    @TableHeader(name = "Nombre")
     @Column(name = "Nombre")
+    @TableHeader(name = "Nombre")
     private String name;
     
     @OneToMany(mappedBy = "Client", cascade = CascadeType.ALL)

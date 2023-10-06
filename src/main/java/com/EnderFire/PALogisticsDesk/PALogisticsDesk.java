@@ -6,8 +6,10 @@ package com.EnderFire.PALogisticsDesk;
 
 import com.EnderFire.PALogisticsDesk.Controls.ClientJpaController;
 import com.EnderFire.PALogisticsDesk.Models.*;
+import com.EnderFire.PALogisticsDesk.Utils.DynamicTable;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JTable;
 
 /**
  *
@@ -16,9 +18,11 @@ import javax.persistence.Persistence;
 public class PALogisticsDesk {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PALogisticsDeskPU");
     public static void main(String[] args) {
-        ClientJpaController cjc=new ClientJpaController(getEntityManagerFactory());
+        DynamicTable<Client> test = new DynamicTable<>(Client.class);
+        test.setJTableModels(new JTable());
+//ClientJpaController cjc=new ClientJpaController(getEntityManagerFactory());
         
-        System.out.println("Hello World!");
+        /*System.out.println("Hello World!");
         Client test = new Client();
         test.setId(1L);
         test.setName("Oscar Wohlfarhrt 4");
@@ -41,7 +45,7 @@ public class PALogisticsDesk {
         //ped.setId(1L);
         test2.getPedidos().add(ped2);
         cjc.create(test);
-        cjc.create(test2);
+        cjc.create(test2);*/
         
         /*Client cli = cjc.findClient(2L);
         for(Pedidos p:cli.getPedidos()){
