@@ -4,6 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk;
 
+import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Models.*;
 import com.EnderFire.PALogisticsDesk.Utils.DynamicTable;
 import javax.swing.JTable;
@@ -12,17 +13,20 @@ import javax.swing.JTable;
  *
  * @author Oscar2
  */
-public class TableViewTest extends javax.swing.JFrame {
+public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
 
+    private Class<T> tClass;
     /**
      * Creates new form TableViewTest
      */
-    public TableViewTest() {
+    public TableViewTest(Class<T> tClass) {
+        this.tClass=tClass;
         initComponents();
         
         //DynamicTable<Client> test = new DynamicTable<>(Client.class);
-        DynamicTable<Pedido> test = new DynamicTable<>(Pedido.class);
-        test.setJTableModels(jTable1);
+        DynamicTable<T> dTable = new DynamicTable<>(tClass);
+        dTable.setJTableModels(jTable1);
+        DynamicTable.LoadTableFromJPA(tClass, jTable1);
     }
 
     /**
@@ -37,7 +41,7 @@ public class TableViewTest extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,7 +106,7 @@ public class TableViewTest extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TableViewTest().setVisible(true);
+                new TableViewTest<Client>(Client.class).setVisible(true);
             }
         });
     }

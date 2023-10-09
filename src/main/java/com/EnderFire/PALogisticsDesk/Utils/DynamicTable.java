@@ -4,6 +4,8 @@
  */
 package com.EnderFire.PALogisticsDesk.Utils;
 
+import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
+import com.EnderFire.PALogisticsDesk.Controls.GenericJpaController;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
@@ -83,6 +85,16 @@ public class DynamicTable<T> {
             /*while(cModel.getColumnCount()>=i)
                 cModel.removeColumn(cModel.getColumn(i));*/
         
+    }
+    
+    public static <T extends GenericEntity> void LoadTableFromJPA(Class<T> eClass,JTable jTable){
+        GenericJpaController<T> gjc = new GenericJpaController<>(eClass);
+        List<T> list = gjc.findEntityEntities();
+        CustomTableModel tModel = (CustomTableModel)jTable.getModel();
+        tModel.clearValues();
+        for(T ent:list){
+            tModel.addRow(ent.getValues());
+        }
     }
     
     private Stream<TableHeader> getTableHeadersAnnotation(){

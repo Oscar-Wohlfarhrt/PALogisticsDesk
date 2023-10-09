@@ -4,6 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
  * @author Oscar2
  */
 @Entity
-public class Client implements Serializable {
+public class Client implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;
     
@@ -62,6 +63,9 @@ public class Client implements Serializable {
 
     public List<Pedido> getPedidos() {        
         return pedidos;
+    }
+    public Object[] getValues(){
+        return new Object[]{id,name};
     }
 
     @Override

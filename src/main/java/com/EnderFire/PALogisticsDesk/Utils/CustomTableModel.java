@@ -66,6 +66,16 @@ public class CustomTableModel extends AbstractTableModel implements TableModel {
         values.get(row)[col]=value;
     }
     
+    public void addRow(Object[] row){
+        values.add(row);
+    }
+    public void setRow(int index, Object[] row){
+        values.set(index, row);
+    }
+    public void clearValues(){
+        values.clear();
+    }
+    
     public boolean isCellEditable(int row, int col) {
         if (col < 1) {
             return false;

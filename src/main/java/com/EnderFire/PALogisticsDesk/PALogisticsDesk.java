@@ -5,8 +5,10 @@
 package com.EnderFire.PALogisticsDesk;
 
 import com.EnderFire.PALogisticsDesk.Controls.ClientJpaController;
+import com.EnderFire.PALogisticsDesk.Controls.GenericJpaController;
 import com.EnderFire.PALogisticsDesk.Models.*;
 import com.EnderFire.PALogisticsDesk.Utils.DynamicTable;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JTable;
@@ -18,11 +20,11 @@ import javax.swing.JTable;
 public class PALogisticsDesk {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PALogisticsDeskPU");
     public static void main(String[] args) {
-        DynamicTable<Client> test = new DynamicTable<>(Client.class);
-        test.setJTableModels(new JTable());
-//ClientJpaController cjc=new ClientJpaController(getEntityManagerFactory());
+        //DynamicTable<Client> test = new DynamicTable<>(Client.class);
+        //test.setJTableModels(new JTable());
+        GenericJpaController<Client> cjc=new GenericJpaController(Client.class);
         
-        /*System.out.println("Hello World!");
+        System.out.println("Hello World!");
         Client test = new Client();
         test.setId(1L);
         test.setName("Oscar Wohlfarhrt 4");
@@ -45,12 +47,15 @@ public class PALogisticsDesk {
         //ped.setId(1L);
         test2.getPedidos().add(ped2);
         cjc.create(test);
-        cjc.create(test2);*/
+        cjc.create(test2);
         
-        /*Client cli = cjc.findClient(2L);
-        for(Pedidos p:cli.getPedidos()){
-            System.out.println(p.getName());
-        }*/
+        List<Client> clis = cjc.findEntityEntities();
+        for(Client c:clis){
+            System.out.println(c.getName());
+            for(Pedido p:c.getPedidos()){
+                System.out.println(p.getName());
+            }
+        }
     }
     
     public static EntityManagerFactory getEntityManagerFactory(){

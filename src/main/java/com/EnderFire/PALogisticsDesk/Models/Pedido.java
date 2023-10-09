@@ -4,6 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.ColumnType;
 import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
@@ -23,7 +24,7 @@ import org.eclipse.persistence.annotations.ReadOnly;
  * @author Oscar2
  */
 @Entity
-public class Pedido implements Serializable {
+public class Pedido implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -32,12 +33,15 @@ public class Pedido implements Serializable {
     private Long id;
     
     @Column(name = "Nombre")
+    @TableHeader(name = "Nombre")
     private String name;
+    
     @TableHeader(name = "Estado",columnType = ColumnType.COMBOBOX,enumClass = EstadosPedido.class)
     private int state;
     @TableHeader(name = "Direccion de entrega")
     private int deliveryAddress;
 
+    @TableHeader(name = "Id de Cliente")
     @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
     
@@ -65,6 +69,9 @@ public class Pedido implements Serializable {
         this.client = client;
     }
     
+    public Object[] getValues(){
+        return new Object[]{id,name,state,deliveryAddress,String.format("[%d] %s", client.getId(),client.getName())};
+    }
 
     @Override
     public int hashCode() {
