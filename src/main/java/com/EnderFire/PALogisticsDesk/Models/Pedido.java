@@ -29,19 +29,19 @@ public class Pedido implements Serializable, GenericEntity {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @TableHeader(name = "ID")
+    @TableHeader(name = "ID",columnSize = 50)
     private Long id;
     
     @Column(name = "Nombre")
-    @TableHeader(name = "Nombre")
+    @TableHeader(name = "Nombre",columnSize = 200)
     private String name;
     
-    @TableHeader(name = "Estado",columnType = ColumnType.COMBOBOX,enumClass = EstadosPedido.class)
+    @TableHeader(name = "Estado",columnType = ColumnType.COMBOBOX,enumClass = EstadosPedido.class,columnSize = 150)
     private int state;
-    @TableHeader(name = "Direccion de entrega")
+    @TableHeader(name = "Direccion de entrega",columnSize = 200)
     private int deliveryAddress;
 
-    @TableHeader(name = "Id de Cliente")
+    @TableHeader(name = "Id de Cliente",columnSize = 200)
     @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
     

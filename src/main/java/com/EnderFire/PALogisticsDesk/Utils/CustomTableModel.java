@@ -17,8 +17,9 @@ import javax.swing.table.TableModel;
  * @author Oscar2
  */
 public class CustomTableModel extends AbstractTableModel implements TableModel {
-    List<Class<?>> types = new ArrayList<>();
-    List<Object[]> values = new ArrayList<>();
+    private List<Class<?>> types = new ArrayList<>();
+    private List<Object[]> values = new ArrayList<>();
+    private Object filter;
     
     public void setColumnClass(int column,Class<?> classType){
         types.set(column, classType);

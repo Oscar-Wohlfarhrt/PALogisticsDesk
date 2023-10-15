@@ -19,5 +19,5 @@ public @interface TableHeader {
     String name();
     int columnType() default ColumnType.TEXTFIELD;
     Class<?> enumClass() default Object.class;
-    int columnSize() default -1;
+    int columnSize() default 0;
 }

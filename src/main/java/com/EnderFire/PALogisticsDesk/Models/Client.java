@@ -32,11 +32,11 @@ public class Client implements Serializable, GenericEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @TableHeader(name = "DNI")
+    @TableHeader(name = "DNI",columnSize = 50)
     private Long id;
     
     @Column(name = "Nombre")
-    @TableHeader(name = "Nombre")
+    @TableHeader(name = "Nombre",columnSize = 300)
     private String name;
     
     @OneToMany(mappedBy = "Client", cascade = CascadeType.ALL)

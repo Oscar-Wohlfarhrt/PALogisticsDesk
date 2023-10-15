@@ -30,8 +30,10 @@ public class DynamicTable<T> {
     public DynamicTable(Class<T> classType){
         this.classType=classType;
     }
-    
     public void setJTableModels(JTable jTable){
+        setJTableModels(jTable, false);
+    }
+    public void setJTableModels(JTable jTable,boolean autoColResize){
         TableHeader[] headers = getTableHeadersAnnotation().toArray(TableHeader[]::new);
         //String[] hNames = headers.map((h)->h.name()).toArray(String[]::new);
         //System.out.println("Headers: "+String.join("; ", getTableHeaders()));
@@ -39,21 +41,27 @@ public class DynamicTable<T> {
         CustomTableModel tModel = new CustomTableModel();
         tModel.setColumnCount(headers.length);
         jTable.setModel(tModel);
+        if(!autoColResize)
+            jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         TableColumnModel cModel = jTable.getColumnModel();
         int i =0;
         for(TableHeader header:headers){
-            /*while(cModel.getColumnCount()<=i)
-                cModel.addColumn(new TableColumn());*/
             
             TableColumn tCol = cModel.getColumn(i);
             tCol.setHeaderValue(header.name());
-            if(header.columnSize()>0)
-                tCol.setWidth(header.columnSize());
+            if(!autoColResize){
+                if(header.columnSize()>0){
+                    tCol.setPreferredWidth(header.columnSize());
+                }
+                else{
+                    tCol.setPreferredWidth(200);
+                }
+            }
             JComboBox<String> ops = new JComboBox<>(){
-                /*@Override
+                @Override
                 public String toString(){
                     return getSelectedItem().toString();
-                }*/
+                }
             };
             JCheckBox checkbox = new JCheckBox();
             switch(header.columnType()){
@@ -82,14 +90,20 @@ public class DynamicTable<T> {
             }*/
             i++;
         }
-            /*while(cModel.getColumnCount()>=i)
-                cModel.removeColumn(cModel.getColumn(i));*/
-        
+        jTable.setColumnModel(cModel);
     }
     
     public static <T extends GenericEntity> void LoadTableFromJPA(Class<T> eClass,JTable jTable){
         GenericJpaController<T> gjc = new GenericJpaController<>(eClass);
         List<T> list = gjc.findEntityEntities();
+        CustomTableModel tModel = (CustomTableModel)jTable.getModel();
+        tModel.clearValues();
+        for(T ent:list){
+            tModel.addRow(ent.getValues());
+        }
+    }
+    
+    public static <T extends GenericEntity> void LoadTableFromList(List<T> list, JTable jTable){
         CustomTableModel tModel = (CustomTableModel)jTable.getModel();
         tModel.clearValues();
         for(T ent:list){
