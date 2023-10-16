@@ -6,6 +6,7 @@ package com.EnderFire.PALogisticsDesk.Utils;
 
 import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Controls.GenericJpaController;
+import com.sun.net.httpserver.Headers;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -68,9 +71,15 @@ public class DynamicTable<T> {
                 case ColumnType.COMBOBOX:
                     DefaultComboBoxModel<String> boxModel = new DefaultComboBoxModel<>();
                     
-                    List<String> options = Arrays.stream(header.enumClass().getEnumConstants()).map((o)->o.toString()).toList();
-                    
-                    boxModel.addAll(options);
+                    int iIndex=Arrays.asList(header.enumClass().getInterfaces()).indexOf(GenericEntity.class);
+                    if(iIndex<0){
+                        List<String> options = Arrays.stream(header.enumClass().getEnumConstants()).map((o)->o.toString()).toList();
+                        boxModel.addAll(options);
+                    }
+                    else{
+                        GenericJpaController<?> jpaEnum = new GenericJpaController(header.enumClass());
+                        boxModel.addAll(jpaEnum.findEntityEntities().stream().map((ent)->ent.getId().toString()).toList());
+                    }
                     /*boxModel.addElement("Masculino");
                     boxModel.addElement("Femenino");*/
                     
@@ -101,6 +110,16 @@ public class DynamicTable<T> {
         for(T ent:list){
             tModel.addRow(ent.getValues());
         }
+        tModel.addTableModelListener(new TableModelListener(){
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                JpaTableCellUpdate(e,tModel,gjc);
+            }
+        });
+    }
+    
+    private static void JpaTableCellUpdate(TableModelEvent evt,CustomTableModel ctm, GenericJpaController<?> jpaCtrl){
+        
     }
     
     public static <T extends GenericEntity> void LoadTableFromList(List<T> list, JTable jTable){

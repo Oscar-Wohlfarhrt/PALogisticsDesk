@@ -34,6 +34,7 @@ com\EnderFire\PALogisticsDesk\TableViewTest$1.class
 com\EnderFire\PALogisticsDesk\Controls\ClientJpaController.class
 com\EnderFire\PALogisticsDesk\Models\InformacionContacto.class
 com\EnderFire\PALogisticsDesk\Models\CentroDistribucion.class
+com\EnderFire\PALogisticsDesk\Utils\DynamicTable$2.class
 com\EnderFire\PALogisticsDesk\ABMLMenu$4.class
 com\EnderFire\PALogisticsDesk\Models\Ruta.class
 com\EnderFire\PALogisticsDesk\Controls\GenericEntity.class
