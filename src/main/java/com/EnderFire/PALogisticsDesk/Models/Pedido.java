@@ -36,7 +36,7 @@ public class Pedido implements Serializable, GenericEntity {
     @TableHeader(name = "Nombre",columnSize = 200)
     private String name;
     
-    @TableHeader(name = "Estado",columnType = ColumnType.COMBOBOX,enumClass = EstadosPedido.class,columnSize = 150)
+    @TableHeader(name = "Estado",columnType = ColumnType.COMBOBOX,enumClass = Client.class,columnSize = 150)
     private int state;
     @TableHeader(name = "Direccion de entrega",columnSize = 200)
     private int deliveryAddress;
