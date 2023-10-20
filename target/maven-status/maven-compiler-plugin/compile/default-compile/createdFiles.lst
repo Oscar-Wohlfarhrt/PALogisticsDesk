@@ -29,6 +29,7 @@ com\EnderFire\PALogisticsDesk\Models\Ubicacion.class
 com\EnderFire\PALogisticsDesk\ABMLMenu$3.class
 com\EnderFire\PALogisticsDesk\Utils\TableHeader.class
 com\EnderFire\PALogisticsDesk\PALogisticsDesk.class
+com\EnderFire\PALogisticsDesk\Utils\DynamicTableModel.class
 com\EnderFire\PALogisticsDesk\exceptions\IllegalOrphanException.class
 com\EnderFire\PALogisticsDesk\TableViewTest$1.class
 com\EnderFire\PALogisticsDesk\Controls\ClientJpaController.class

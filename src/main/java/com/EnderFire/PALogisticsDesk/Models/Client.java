@@ -92,5 +92,31 @@ public class Client implements Serializable, GenericEntity {
     public String toString() {
         return "com.EnderFire.PALogisticsDesk.Models.Client[ id=" + id + " ]";
     }
+
+    /*@Override
+    public Object getValue(int index) {
+        switch(index){
+            case 0:
+                return id;
+            case 1:
+                return name;
+            default:
+                return "";
+        }
+    }
+
+    @Override
+    public void setValue(int index, Object value) {
+        switch(index){
+            case 0:
+                id = (Long)value;
+                break;
+            case 1:
+                name = (String)value;
+                break;
+            default:
+                break;
+        }
+    }*/
     
 }

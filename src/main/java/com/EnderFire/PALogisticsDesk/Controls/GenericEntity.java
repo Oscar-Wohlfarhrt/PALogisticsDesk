@@ -11,4 +11,6 @@ package com.EnderFire.PALogisticsDesk.Controls;
 public interface GenericEntity {
     public Long getId();
     public Object[] getValues();
+    //public Object getValue(int index);
+    //public void setValue(int index,Object value);
 }

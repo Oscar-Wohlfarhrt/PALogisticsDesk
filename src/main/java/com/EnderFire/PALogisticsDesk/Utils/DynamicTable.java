@@ -25,7 +25,7 @@ import javax.swing.table.TableColumnModel;
  *
  * @author Oscar2
  */
-public class DynamicTable<T> {
+public class DynamicTable<T extends GenericEntity> {
     public final Class<T> classType;
     public DynamicTable(Class<T> classType){
         this.classType=classType;
@@ -38,8 +38,8 @@ public class DynamicTable<T> {
         //String[] hNames = headers.map((h)->h.name()).toArray(String[]::new);
         //System.out.println("Headers: "+String.join("; ", getTableHeaders()));
         //headers.forEach((h)->{System.out.println(h.name()+"; ");});
-        CustomTableModel tModel = new CustomTableModel();
-        tModel.setColumnCount(headers.length);
+        DynamicTableModel<T> tModel = new DynamicTableModel<>(classType);
+        //tModel.setColumnCount(headers.length);
         jTable.setModel(tModel);
         if(!autoColResize)
             jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -83,6 +83,7 @@ public class DynamicTable<T> {
                     tModel.setColumnClass(i, Boolean.class);
                     break;
                 default:
+                    tModel.setColumnClass(i, String.class);
                     break;
             }
             /*if(i==2){
@@ -96,21 +97,29 @@ public class DynamicTable<T> {
     public static <T extends GenericEntity> void LoadTableFromJPA(Class<T> eClass,JTable jTable){
         GenericJpaController<T> gjc = new GenericJpaController<>(eClass);
         List<T> list = gjc.findEntityEntities();
-        CustomTableModel tModel = (CustomTableModel)jTable.getModel();
-        tModel.clearValues();
+        DynamicTableModel tModel = (DynamicTableModel)jTable.getModel();
+        tModel.setValues(list);
+        /*tModel.clearValues();
         for(T ent:list){
             tModel.addRow(ent.getValues());
-        }
+        }*/
     }
     
     public static <T extends GenericEntity> void LoadTableFromList(List<T> list, JTable jTable){
-        CustomTableModel tModel = (CustomTableModel)jTable.getModel();
-        tModel.clearValues();
+        DynamicTableModel tModel = (DynamicTableModel)jTable.getModel();
+        tModel.setValues(list);
+        /*tModel.clearValues();
         for(T ent:list){
-            tModel.addRow(ent.getValues());
-        }
+            tModel.addRow(ent);
+        }*/
     }
     
+    public static <T extends GenericEntity> Stream<Field> getDynTableFields(Class<T> tClass){
+        Field[] fields = tClass.getDeclaredFields();
+        
+        return Arrays.stream(fields)
+               .filter(f->f.isAnnotationPresent(TableHeader.class));
+    }
     private Stream<TableHeader> getTableHeadersAnnotation(){
         Field[] fields = classType.getDeclaredFields();
         
