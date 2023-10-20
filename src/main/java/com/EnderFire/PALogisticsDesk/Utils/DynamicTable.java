@@ -112,17 +112,17 @@ public class DynamicTable<T extends GenericEntity> {
         for(T ent:list){
             tModel.addRow(ent.getValues());
         }*/
-        tModel.addTableModelListener(new TableModelListener(){
+        /*tModel.addTableModelListener(new TableModelListener(){
             @Override
             public void tableChanged(TableModelEvent e) {
                 JpaTableCellUpdate(e,tModel,gjc);
             }
-        });
+        });*/
     }
     
-    private static void JpaTableCellUpdate(TableModelEvent evt,CustomTableModel ctm, GenericJpaController<?> jpaCtrl){
+    /*private static void JpaTableCellUpdate(TableModelEvent evt,CustomTableModel ctm, GenericJpaController<?> jpaCtrl){
         
-    }
+    }*/
     
     public static <T extends GenericEntity> void LoadTableFromList(List<T> list, JTable jTable){
         DynamicTableModel tModel = (DynamicTableModel)jTable.getModel();
