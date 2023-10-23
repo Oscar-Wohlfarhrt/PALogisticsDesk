@@ -90,7 +90,8 @@ public class Client implements Serializable, GenericEntity {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.Client[ id=" + id + " ]";
+        return String.format("[%d] %s", id,name);
+        //return "com.EnderFire.PALogisticsDesk.Models.Client[ id=" + id + " ]";
     }
 
     /*@Override

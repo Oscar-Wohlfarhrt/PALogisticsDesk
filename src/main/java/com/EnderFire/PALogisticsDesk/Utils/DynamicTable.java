@@ -92,7 +92,7 @@ public class DynamicTable<T extends GenericEntity> {
                     tModel.setColumnClass(i, Boolean.class);
                     break;
                 default:
-                    tModel.setColumnClass(i, String.class);
+                    //tModel.setColumnClass(i, String.class);
                     break;
             }
             /*if(i==2){

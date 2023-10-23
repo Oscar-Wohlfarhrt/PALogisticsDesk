@@ -31,7 +31,10 @@ public class DynamicTableModel<T extends GenericEntity> extends AbstractTableMod
     public DynamicTableModel(Class<T> tClass){
         this.tClass = tClass;
         tFields = DynamicTable.getDynTableFields(tClass).toArray(Field[]::new);
-        typesArr=((Stream<Class<?>>)DynamicTable.getDynTableFields(tClass).map((f)->f.getDeclaringClass())).toArray(Class<?>[]::new);
+        for(Field f:tFields){
+            f.setAccessible(true);
+        }
+        typesArr=((Stream<Class<?>>)DynamicTable.getDynTableFields(tClass).map((f)->f.getType())).toArray(Class<?>[]::new);
     }
     
     public void setColumnClass(int col,Class<?> tClass){
@@ -73,9 +76,9 @@ public class DynamicTableModel<T extends GenericEntity> extends AbstractTableMod
         //return values.get(rowIndex).getValue(columnIndex);
         try{
             Object val = tFields[columnIndex].get(values.get(rowIndex));
-            return val;
+            return typesArr[columnIndex].cast(val);
         }
-        catch(IllegalArgumentException | IllegalAccessException e){
+        catch(IllegalArgumentException | IllegalAccessException | ClassCastException e){
             return new Object();
         }
         
