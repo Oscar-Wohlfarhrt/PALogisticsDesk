@@ -10,6 +10,8 @@ import com.sun.net.httpserver.Headers;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
@@ -78,18 +80,18 @@ public class DynamicTable<T extends GenericEntity> {
                     }
                     else{
                         GenericJpaController<?> jpaEnum = new GenericJpaController(header.enumClass());
-                        boxModel.addAll(jpaEnum.findEntityEntities().stream().map((ent)->ent.getId().toString()).toList());
+                        boxModel.addAll(jpaEnum.findEntityEntities().stream().map((ent)->ent.toString()).toList());
                     }
                     /*boxModel.addElement("Masculino");
                     boxModel.addElement("Femenino");*/
                     
                     ops.setModel(boxModel);
-                    tModel.setColumnClass(i, JCheckBox.class);
+                    tModel.setColumnClass(i, header.enumClass());
                     tCol.setCellEditor(new DefaultCellEditor(ops));
                     break;
                 case ColumnType.CHECKBOX:
                     //tCol.setCellEditor(new DefaultCellEditor(checkbox));
-                    tModel.setColumnClass(i, Boolean.class);
+                    //tModel.setColumnClass(i, Boolean.class);
                     break;
                 default:
                     //tModel.setColumnClass(i, String.class);
@@ -101,6 +103,41 @@ public class DynamicTable<T extends GenericEntity> {
             i++;
         }
         jTable.setColumnModel(cModel);
+    }
+    
+    public static <T> List<String> getEnumFromClass(Class<T> tClass){
+        int iIndex=Arrays.asList(tClass.getInterfaces()).indexOf(GenericEntity.class);
+        if(iIndex<0){
+            return Arrays.stream(tClass.getEnumConstants()).map((o)->o.toString()).toList();
+        }
+        else{
+            GenericJpaController<?> jpaEnum = new GenericJpaController(tClass);
+            return jpaEnum.findEntityEntities().stream().map((ent)->ent.toString()).toList();
+        }
+    }
+    /*public static <T extends GenericEntity> T getObjectFromEnumString(Class<T> tClass, String){
+        
+        GenericJpaController<?> jpaEnum = new GenericJpaController(tClass);
+        
+        return jpaEnum.findEntity(1);
+    }*/
+    
+    public static <T> Long getIdFromEnumClass(Class<T> tClass, String value){
+        Pattern enumIdPat = Pattern.compile("\\[.+?\\].*");
+        Matcher mat = enumIdPat.matcher(value);
+        try{
+            if(mat.find()){
+                return Long.parseLong(mat.group(1));
+            }
+            else{
+                return Long.valueOf(getEnumFromClass(tClass).indexOf(value));
+            }
+        }
+        finally{
+            return Long.valueOf(-1);
+        }
+        
+        //return Long.valueOf(id);
     }
     
     public static <T extends GenericEntity> void LoadTableFromJPA(Class<T> eClass,JTable jTable){

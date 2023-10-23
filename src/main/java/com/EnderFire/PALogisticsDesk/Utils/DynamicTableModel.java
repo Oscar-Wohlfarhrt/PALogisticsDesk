@@ -5,11 +5,14 @@
 package com.EnderFire.PALogisticsDesk.Utils;
 
 import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
+import com.EnderFire.PALogisticsDesk.Controls.GenericJpaController;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
@@ -89,9 +92,31 @@ public class DynamicTableModel<T extends GenericEntity> extends AbstractTableMod
     }
     
     public void setValueAt(Object value, int row, int col){
-        //values.get(row).setValue(col,value);
+        if (value!=null)
+            System.out.println(value.getClass());
+        else
+            System.out.println("Es null");
+        
         try{
-            tFields[col].set(values.get(row),value);
+            TableHeader tHead = typesArr[col].getAnnotation(TableHeader.class);
+            if(Number.class.isAssignableFrom(typesArr[col])){
+                tFields[col].set(values.get(row),value);
+            }
+            else if(GenericEntity.class.isAssignableFrom(typesArr[col])){
+                GenericJpaController<?> jpa = new GenericJpaController(typesArr[col]);
+                Pattern enumIdPat = Pattern.compile("\\[(.+?)\\].*");
+                Matcher mat = enumIdPat.matcher((String)value);
+                if(mat.find())
+                    tFields[col].set(values.get(row),jpa.findEntity(Long.parseLong(mat.group(1))));
+            }
+            else if(typesArr[col].isEnum()){
+                int index = Arrays.stream(typesArr[col].getEnumConstants()).map((o)->o.toString()).toList().indexOf(value);
+                System.out.println(index);
+                tFields[col].set(values.get(row),(Number)index);
+            }
+            else{
+                tFields[col].set(values.get(row),value);
+            }
         }
         catch(IllegalArgumentException | IllegalAccessException e){
         }
