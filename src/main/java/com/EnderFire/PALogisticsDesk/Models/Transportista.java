@@ -5,10 +5,17 @@
 package com.EnderFire.PALogisticsDesk.Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -24,6 +31,10 @@ public class Transportista implements Serializable {
     private String name;
     private float salary;
     private float costs;
+    //FK
+    
+    @OneToMany(mappedBy = "trans", cascade = CascadeType.ALL)
+    private List<Ruta> rutas = new ArrayList<>();
 
     public Long getId() {
         return id;

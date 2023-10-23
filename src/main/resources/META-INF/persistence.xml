@@ -18,7 +18,7 @@
     <class>com.EnderFire.PALogisticsDesk.Models.InformacionContacto</class>
     <class>com.EnderFire.PALogisticsDesk.Models.CentroDistribucion</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost\MSSQLSERVER:1433;databaseName=DBPATPI;encrypt=false"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://Oscar-NB\MSSQLSERVER:1433;databaseName=DBPATPI;encrypt=false"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>
       <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
       <property name="javax.persistence.jdbc.password" value="ronroneo"/>
