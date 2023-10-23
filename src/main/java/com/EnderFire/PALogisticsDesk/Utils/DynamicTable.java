@@ -4,6 +4,9 @@
  */
 package com.EnderFire.PALogisticsDesk.Utils;
 
+import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
+import com.EnderFire.PALogisticsDesk.Controls.GenericJpaController;
+import com.sun.net.httpserver.Headers;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +16,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -23,44 +28,58 @@ import javax.swing.table.TableColumnModel;
  *
  * @author Oscar2
  */
-public class DynamicTable<T> {
+public class DynamicTable<T extends GenericEntity> {
     public final Class<T> classType;
     public DynamicTable(Class<T> classType){
         this.classType=classType;
     }
-    
     public void setJTableModels(JTable jTable){
+        setJTableModels(jTable, false);
+    }
+    public void setJTableModels(JTable jTable,boolean autoColResize){
         TableHeader[] headers = getTableHeadersAnnotation().toArray(TableHeader[]::new);
         //String[] hNames = headers.map((h)->h.name()).toArray(String[]::new);
         //System.out.println("Headers: "+String.join("; ", getTableHeaders()));
         //headers.forEach((h)->{System.out.println(h.name()+"; ");});
-        CustomTableModel tModel = new CustomTableModel();
-        tModel.setColumnCount(headers.length);
+        DynamicTableModel<T> tModel = new DynamicTableModel<>(classType);
+        //tModel.setColumnCount(headers.length);
         jTable.setModel(tModel);
+        if(!autoColResize)
+            jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         TableColumnModel cModel = jTable.getColumnModel();
         int i =0;
         for(TableHeader header:headers){
-            /*while(cModel.getColumnCount()<=i)
-                cModel.addColumn(new TableColumn());*/
             
             TableColumn tCol = cModel.getColumn(i);
             tCol.setHeaderValue(header.name());
-            if(header.columnSize()>0)
-                tCol.setWidth(header.columnSize());
+            if(!autoColResize){
+                if(header.columnSize()>0){
+                    tCol.setPreferredWidth(header.columnSize());
+                }
+                else{
+                    tCol.setPreferredWidth(200);
+                }
+            }
             JComboBox<String> ops = new JComboBox<>(){
-                /*@Override
+                @Override
                 public String toString(){
                     return getSelectedItem().toString();
-                }*/
+                }
             };
             JCheckBox checkbox = new JCheckBox();
             switch(header.columnType()){
                 case ColumnType.COMBOBOX:
                     DefaultComboBoxModel<String> boxModel = new DefaultComboBoxModel<>();
                     
-                    List<String> options = Arrays.stream(header.enumClass().getEnumConstants()).map((o)->o.toString()).toList();
-                    
-                    boxModel.addAll(options);
+                    int iIndex=Arrays.asList(header.enumClass().getInterfaces()).indexOf(GenericEntity.class);
+                    if(iIndex<0){
+                        List<String> options = Arrays.stream(header.enumClass().getEnumConstants()).map((o)->o.toString()).toList();
+                        boxModel.addAll(options);
+                    }
+                    else{
+                        GenericJpaController<?> jpaEnum = new GenericJpaController(header.enumClass());
+                        boxModel.addAll(jpaEnum.findEntityEntities().stream().map((ent)->ent.getId().toString()).toList());
+                    }
                     /*boxModel.addElement("Masculino");
                     boxModel.addElement("Femenino");*/
                     
@@ -73,6 +92,7 @@ public class DynamicTable<T> {
                     tModel.setColumnClass(i, Boolean.class);
                     break;
                 default:
+                    //tModel.setColumnClass(i, String.class);
                     break;
             }
             /*if(i==2){
@@ -80,11 +100,45 @@ public class DynamicTable<T> {
             }*/
             i++;
         }
-            /*while(cModel.getColumnCount()>=i)
-                cModel.removeColumn(cModel.getColumn(i));*/
-        
+        jTable.setColumnModel(cModel);
     }
     
+    public static <T extends GenericEntity> void LoadTableFromJPA(Class<T> eClass,JTable jTable){
+        GenericJpaController<T> gjc = new GenericJpaController<>(eClass);
+        List<T> list = gjc.findEntityEntities();
+        DynamicTableModel tModel = (DynamicTableModel)jTable.getModel();
+        tModel.setValues(list);
+        /*tModel.clearValues();
+        for(T ent:list){
+            tModel.addRow(ent.getValues());
+        }*/
+        /*tModel.addTableModelListener(new TableModelListener(){
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                JpaTableCellUpdate(e,tModel,gjc);
+            }
+        });*/
+    }
+    
+    /*private static void JpaTableCellUpdate(TableModelEvent evt,CustomTableModel ctm, GenericJpaController<?> jpaCtrl){
+        
+    }*/
+    
+    public static <T extends GenericEntity> void LoadTableFromList(List<T> list, JTable jTable){
+        DynamicTableModel tModel = (DynamicTableModel)jTable.getModel();
+        tModel.setValues(list);
+        /*tModel.clearValues();
+        for(T ent:list){
+            tModel.addRow(ent);
+        }*/
+    }
+    
+    public static <T extends GenericEntity> Stream<Field> getDynTableFields(Class<T> tClass){
+        Field[] fields = tClass.getDeclaredFields();
+        
+        return Arrays.stream(fields)
+               .filter(f->f.isAnnotationPresent(TableHeader.class));
+    }
     private Stream<TableHeader> getTableHeadersAnnotation(){
         Field[] fields = classType.getDeclaredFields();
         
