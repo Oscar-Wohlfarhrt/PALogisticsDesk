@@ -29,8 +29,8 @@ public class Transportista implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private float salary;
-    private float costs;
+    private Float salary;
+    private Float costs;
     //FK
     
     @OneToMany(mappedBy = "trans", cascade = CascadeType.ALL)

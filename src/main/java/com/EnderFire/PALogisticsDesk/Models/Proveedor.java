@@ -5,10 +5,15 @@
 package com.EnderFire.PALogisticsDesk.Models;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -27,6 +32,15 @@ public class Proveedor implements Serializable {
     private Contrato contract;
     private RendimientoProveedor pr;
     private OrdenCompra po;
+    
+    
+    //esto no me gusta como comparte informacion con cliente pero bueno
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "id")
+    private InformacionContacto contactInfo;
+    
+    @ManyToMany
+    private List<Mercancia> merch;
 
     public Long getId() {
         return id;

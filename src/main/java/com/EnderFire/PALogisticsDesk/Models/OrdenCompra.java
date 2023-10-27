@@ -21,7 +21,7 @@ public class OrdenCompra implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private float totalCost;
+    private Float totalCost;
 
     public Long getId() {
         return id;

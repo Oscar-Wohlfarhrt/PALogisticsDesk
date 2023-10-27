@@ -5,10 +5,14 @@
 package com.EnderFire.PALogisticsDesk.Models;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -22,8 +26,14 @@ public class Mercancia implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String descirption;
-    private float value;
-
+    private Float value;
+    
+    @ManyToMany
+    private List<Proveedor> supplier;
+    
+    @OneToMany(mappedBy="Mercancia",cascade = CascadeType.ALL)
+    private List<Contrato> contract;
+            
     public Long getId() {
         return id;
     }
