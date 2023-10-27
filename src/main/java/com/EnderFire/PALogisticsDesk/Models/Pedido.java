@@ -36,12 +36,12 @@ public class Pedido implements Serializable, GenericEntity {
     @TableHeader(name = "Nombre",columnSize = 200)
     private String name;
     
-    @TableHeader(name = "Estado",columnType = ColumnType.COMBOBOX,enumClass = Client.class,columnSize = 150)
-    private int state;
+    @TableHeader(name = "Estado",columnType = ColumnType.COMBOBOX,enumClass = EstadosPedido.class,columnSize = 150)
+    private Integer state = 0;
     @TableHeader(name = "Direccion de entrega",columnSize = 200)
-    private int deliveryAddress;
+    private String deliveryAddress = "Unknown";
 
-    @TableHeader(name = "Id de Cliente",columnSize = 200)
+    @TableHeader(name = "Id de Cliente",columnSize = 200,columnType = ColumnType.COMBOBOX,enumClass = Client.class)
     @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
     
