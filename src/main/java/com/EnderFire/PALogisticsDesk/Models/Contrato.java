@@ -23,6 +23,8 @@ public class Contrato implements Serializable {
     private Long id;
     //private ???? partsInvolved; ArrayList<>????
     private String description;
+    
+    
 
     public Long getId() {
         return id;
