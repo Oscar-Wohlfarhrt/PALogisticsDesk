@@ -34,7 +34,7 @@ public class Mercancia implements Serializable {
     private List<Proveedor> supplier;
     
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = OrdenCompra.class)
-    private List<OrdenCompra> order;
+    private List<OrdenCompra> order = new ArrayList<>();
             
     public Long getId() {
         return id;
