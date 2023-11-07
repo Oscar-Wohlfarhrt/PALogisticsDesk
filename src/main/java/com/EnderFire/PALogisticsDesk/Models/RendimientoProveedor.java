@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -21,9 +22,12 @@ public class RendimientoProveedor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private float productQuality;
-    private float inTimeP;//P=porcentaje
-    private float deliveryErrorsP;//P=porcentaje
+    private Float productQuality;
+    private Float inTimeP;//P=porcentaje
+    private Float deliveryErrorsP;//P=porcentaje
+    
+    @OneToOne(mappedBy = "RendimientoProveedor")
+    private Proveedor supplier;
 
     public Long getId() {
         return id;

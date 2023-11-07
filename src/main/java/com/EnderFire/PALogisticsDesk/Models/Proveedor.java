@@ -5,14 +5,22 @@
 package com.EnderFire.PALogisticsDesk.Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Oscar2
+ * relaciones 5/5
  */
 @Entity
 public class Proveedor implements Serializable {
@@ -23,11 +31,24 @@ public class Proveedor implements Serializable {
     private Long id;
     private String name;
     private String productBrand;
-    private InformacionContacto ci;
-    private Contrato contract;
-    private RendimientoProveedor pr;
-    private OrdenCompra po;
-
+    //Informacion contacto (relacion 1)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "id")
+    private InformacionContacto contactInfo;
+    //Mercancia(relacion 2)
+    @ManyToMany
+    private List<Mercancia> merch;
+    //Rendimiento(relacion 3)
+    @OneToOne(cascade = CascadeType.ALL)/*rendimiento proveedor*/
+    @JoinColumn(referencedColumnName = "id")
+    private RendimientoProveedor performance;
+    //OrdenCompra un proveedor muchas ordenes(relacion 4)
+    @OneToMany(mappedBy = "Proveedor", cascade = CascadeType.ALL)
+    List<OrdenCompra> order = new ArrayList<>();
+    //Contrato(relacion5)
+    @OneToMany(mappedBy = "Proveedor", cascade = CascadeType.ALL)
+    List<Contrato> contract = new ArrayList<>();
+    
     public Long getId() {
         return id;
     }

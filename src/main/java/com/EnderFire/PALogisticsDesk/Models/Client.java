@@ -12,12 +12,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PersistenceProperty;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
@@ -29,22 +32,26 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 public class Client implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @TableHeader(name = "DNI",columnSize = 50)
+    @TableHeader(name = "DNI", columnSize = 50)
     private Long id;
-    
+
     @Column(name = "Nombre")
-    @TableHeader(name = "Nombre",columnSize = 300)
+    @TableHeader(name = "Nombre", columnSize = 300)
     private String name;
-    
+
     @OneToMany(mappedBy = "Client", cascade = CascadeType.ALL)
     List<Preferencia> preferencias = new ArrayList<>();
-    
+
     @OneToMany(mappedBy = "Client", cascade = CascadeType.ALL)
     private List<Pedido> pedidos = new ArrayList<>();
-
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "id")
+    private InformacionContacto contactInfo;
+      
     public Long getId() {
         return id;
     }
@@ -61,11 +68,12 @@ public class Client implements Serializable, GenericEntity {
         this.name = name;
     }
 
-    public List<Pedido> getPedidos() {        
+    public List<Pedido> getPedidos() {
         return pedidos;
     }
-    public Object[] getValues(){
-        return new Object[]{id,name};
+
+    public Object[] getValues() {
+        return new Object[]{id, name};
     }
 
     @Override
@@ -90,7 +98,7 @@ public class Client implements Serializable, GenericEntity {
 
     @Override
     public String toString() {
-        return String.format("[%d] %s", id,name);
+        return String.format("[%d] %s", id, name);
         //return "com.EnderFire.PALogisticsDesk.Models.Client[ id=" + id + " ]";
     }
 
@@ -119,5 +127,4 @@ public class Client implements Serializable, GenericEntity {
                 break;
         }
     }*/
-    
 }
