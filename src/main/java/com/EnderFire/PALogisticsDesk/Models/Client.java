@@ -12,17 +12,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PersistenceProperty;
-import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 /**
  *
@@ -42,10 +37,10 @@ public class Client implements Serializable, GenericEntity {
     @TableHeader(name = "Nombre", columnSize = 300)
     private String name;
 
-    @OneToMany(mappedBy = "Client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     List<Preferencia> preferencias = new ArrayList<>();
 
-    @OneToMany(mappedBy = "Client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Pedido> pedidos = new ArrayList<>();
     
     @OneToOne(cascade = CascadeType.ALL)

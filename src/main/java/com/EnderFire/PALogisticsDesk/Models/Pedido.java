@@ -45,6 +45,10 @@ public class Pedido implements Serializable, GenericEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
     
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Ubicacion location;
+    
     public Long getId() {
         return id;
     }

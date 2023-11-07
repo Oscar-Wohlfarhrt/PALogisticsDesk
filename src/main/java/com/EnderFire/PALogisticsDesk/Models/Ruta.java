@@ -5,12 +5,15 @@
 package com.EnderFire.PALogisticsDesk.Models;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -24,10 +27,14 @@ public class Ruta implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String description;
-    //FK
     
-   @ManyToOne(fetch = FetchType.LAZY)
+//FK
+    
+   @OneToMany(fetch = FetchType.LAZY)
     private Transportista trans;
+   
+   @ManyToMany
+    private List<Ubicacion> locations;
 
     public Long getId() {
         return id;

@@ -5,10 +5,13 @@
 package com.EnderFire.PALogisticsDesk.Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -24,6 +27,9 @@ public class Ubicacion implements Serializable {
     private String name;
     private String latitude; //revisar el tipo de dato. Por la naturaleza de la coordenada hay que especificar si es norte o sur y expresarse en grados sexagesimales con sus minutos y segundos respectivos
     private String longitude;//revisar el tipo de dato
+   
+    @OneToMany(mappedBy = "location")
+    private List<Pedido> p =  new ArrayList<>();
     
 
     public Long getId() {

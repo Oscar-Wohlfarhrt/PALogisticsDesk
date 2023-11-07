@@ -5,8 +5,8 @@
 package com.EnderFire.PALogisticsDesk.Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 
 /**
  *
@@ -33,8 +33,8 @@ public class Mercancia implements Serializable {
     @ManyToMany
     private List<Proveedor> supplier;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    private List<OrdenCompra> order;
+     @ManyToMany(mappedBy = "merchandise")
+     private List<OrdenCompra> order = new ArrayList<>();
             
     public Long getId() {
         return id;

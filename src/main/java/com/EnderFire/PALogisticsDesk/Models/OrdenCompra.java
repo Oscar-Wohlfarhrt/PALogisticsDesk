@@ -13,6 +13,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -32,7 +35,11 @@ public class OrdenCompra implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Proveedor suplier;
     
-    @OneToMany(mappedBy = "OrdenCompra", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+        joinColumns = @JoinColumn(name = "id"),
+        inverseJoinColumns = @JoinColumn(name = "id")
+    )
     List<Mercancia> merchandise = new ArrayList<>();
 
     public Long getId() {

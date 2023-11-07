@@ -6,10 +6,13 @@ package com.EnderFire.PALogisticsDesk.Models;
 
 import java.io.Serializable;
 import java.time.Period;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -24,6 +27,10 @@ public class CentroDistribucion implements Serializable {
     private Long id;
     private String name;
     private Period timeOpen;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Ubicacion location;
 
     public Long getId() {
         return id;
