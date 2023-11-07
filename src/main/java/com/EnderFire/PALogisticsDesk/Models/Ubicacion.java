@@ -29,7 +29,7 @@ public class Ubicacion implements Serializable {
     private String longitude;//revisar el tipo de dato
    
     @OneToMany(mappedBy = "location")
-    private List<Pedido> p =  new ArrayList<>();
+    private List<Pedido> pedidos =  new ArrayList<>();
     
 
     public Long getId() {
