@@ -4,7 +4,6 @@
  */
 package com.EnderFire.PALogisticsDesk.Utils;
 
-import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Controls.GenericJpaController;
 import com.sun.net.httpserver.Headers;
 import java.lang.reflect.Field;

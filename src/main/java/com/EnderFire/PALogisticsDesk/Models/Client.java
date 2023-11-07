@@ -4,7 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
-import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -24,9 +24,9 @@ public class Ruta implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String description;
-    //FK
     
-   @ManyToOne(fetch = FetchType.LAZY)
+    //FK
+    @ManyToOne(fetch = FetchType.LAZY)
     private Transportista trans;
 
     public Long getId() {

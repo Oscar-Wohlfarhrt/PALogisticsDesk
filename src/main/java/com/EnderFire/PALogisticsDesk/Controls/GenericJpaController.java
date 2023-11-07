@@ -4,6 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Controls;
 
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Models.Client;
 import com.EnderFire.PALogisticsDesk.exceptions.NonexistentEntityException;
 import java.io.Serializable;

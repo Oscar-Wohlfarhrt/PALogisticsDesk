@@ -4,8 +4,8 @@
  */
 package com.EnderFire.PALogisticsDesk.Utils;
 
-import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Controls.GenericJpaController;
+import com.EnderFire.PALogisticsDesk.exceptions.NonexistentEntityException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
+import javax.persistence.Id;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -90,6 +91,9 @@ public class DynamicTableModel<T extends GenericEntity> extends AbstractTableMod
     public void setValues(List<T> newValues){
         values=newValues;
     }
+    public List<T> getValues(){
+        return values;
+    }
     
     public void setValueAt(Object value, int row, int col){
         if (value!=null)
@@ -112,13 +116,13 @@ public class DynamicTableModel<T extends GenericEntity> extends AbstractTableMod
             else if(typesArr[col].isEnum()){
                 int index = Arrays.stream(typesArr[col].getEnumConstants()).map((o)->o.toString()).toList().indexOf(value);
                 System.out.println(index);
-                tFields[col].set(values.get(row),(Number)index);
+                tFields[col].set(values.get(row),typesArr[col].getEnumConstants()[index]);
             }
             else{
                 tFields[col].set(values.get(row),value);
             }
         }
-        catch(IllegalArgumentException | IllegalAccessException e){
+        catch(Exception e){
         }
     }
     
@@ -133,10 +137,11 @@ public class DynamicTableModel<T extends GenericEntity> extends AbstractTableMod
     }
     
     public boolean isCellEditable(int row, int col) {
-        if (col < 1) {
+        return !tFields[col].isAnnotationPresent(Id.class);
+        /*if (col < 1) {
             return false;
         } else {
             return true;
-        }
+        }*/
     }
 }

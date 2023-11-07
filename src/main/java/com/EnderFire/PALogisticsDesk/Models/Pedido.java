@@ -4,7 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
-import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.ColumnType;
 import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
@@ -37,7 +37,7 @@ public class Pedido implements Serializable, GenericEntity {
     private String name;
     
     @TableHeader(name = "Estado",columnType = ColumnType.COMBOBOX,enumClass = EstadosPedido.class,columnSize = 150)
-    private Integer state = 0;
+    private EstadosPedido state = EstadosPedido.NoDespachado;
     @TableHeader(name = "Direccion de entrega",columnSize = 200)
     private String deliveryAddress = "Unknown";
 
