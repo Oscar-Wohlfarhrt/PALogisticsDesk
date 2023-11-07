@@ -26,7 +26,7 @@ public class RendimientoProveedor implements Serializable {
     private Float inTimeP;//P=porcentaje
     private Float deliveryErrorsP;//P=porcentaje
     
-    @OneToOne(mappedBy = "RendimientoProveedor")
+    @OneToOne(/*mappedBy = "RendimientoProveedor",*/targetEntity = Proveedor.class)
     private Proveedor supplier;
 
     public Long getId() {

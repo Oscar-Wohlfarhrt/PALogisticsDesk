@@ -32,7 +32,7 @@ public class OrdenCompra implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Proveedor suplier;
     
-    @OneToMany(mappedBy = "OrdenCompra", cascade = CascadeType.ALL)
+    @OneToMany(/*mappedBy = "OrdenCompra",*/targetEntity = Mercancia.class, cascade = CascadeType.ALL)
     List<Mercancia> merchandise = new ArrayList<>();
 
     public Long getId() {

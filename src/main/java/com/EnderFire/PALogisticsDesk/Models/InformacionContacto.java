@@ -28,8 +28,8 @@ public class InformacionContacto implements Serializable {
     private String email;
     private String address;
     
-    @OneToOne(mappedBy = "Client")
-    private Client client;
+    @OneToOne(targetEntity = Cliente.class)//mappedBy = "Cliente",
+    private Cliente client;
 
     public Long getId() {
         return id;

@@ -41,9 +41,9 @@ public class Pedido implements Serializable, GenericEntity {
     @TableHeader(name = "Direccion de entrega",columnSize = 200)
     private String deliveryAddress = "Unknown";
 
-    @TableHeader(name = "Id de Cliente",columnSize = 200,columnType = ColumnType.COMBOBOX,enumClass = Client.class)
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Client client;
+    @TableHeader(name = "Id de Cliente",columnSize = 200,columnType = ColumnType.COMBOBOX,enumClass = Cliente.class)
+    @ManyToOne(targetEntity = Cliente.class)
+    private Cliente client;
     
     public Long getId() {
         return id;
@@ -61,11 +61,11 @@ public class Pedido implements Serializable, GenericEntity {
         this.name = name;
     }
 
-    public Client getClient() {
+    public Cliente getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(Cliente client) {
         this.client = client;
     }
     

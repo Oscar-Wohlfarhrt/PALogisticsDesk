@@ -30,10 +30,10 @@ public class Mercancia implements Serializable {
     private String descirption;
     private Float value;
     
-    @ManyToMany
+    @ManyToMany(targetEntity = Proveedor.class)
     private List<Proveedor> supplier;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,targetEntity = OrdenCompra.class)
     private List<OrdenCompra> order;
             
     public Long getId() {

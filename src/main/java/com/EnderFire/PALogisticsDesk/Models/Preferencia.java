@@ -25,8 +25,8 @@ public class Preferencia implements Serializable {
     private Long id;
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Client client;
+    @ManyToOne(fetch = FetchType.LAZY,targetEntity = Cliente.class)
+    private Cliente client;
     
     public Long getId() {
         return id;

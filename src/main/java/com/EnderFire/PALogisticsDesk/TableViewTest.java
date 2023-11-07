@@ -205,7 +205,7 @@ public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TableViewTest<Client>(Client.class).setVisible(true);
+                new TableViewTest<Cliente>(Cliente.class).setVisible(true);
             }
         });
     }

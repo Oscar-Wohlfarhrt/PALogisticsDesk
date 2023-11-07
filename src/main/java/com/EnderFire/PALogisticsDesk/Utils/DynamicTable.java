@@ -83,7 +83,6 @@ public class DynamicTable<T extends GenericEntity> {
                     }
                     /*boxModel.addElement("Masculino");
                     boxModel.addElement("Femenino");*/
-                    
                     ops.setModel(boxModel);
                     tModel.setColumnClass(i, header.enumClass());
                     tCol.setCellEditor(new DefaultCellEditor(ops));

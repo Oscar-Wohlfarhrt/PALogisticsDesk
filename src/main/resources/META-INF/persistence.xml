@@ -2,7 +2,6 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="PALogisticsDeskPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.EnderFire.PALogisticsDesk.Models.Client</class>
     <class>com.EnderFire.PALogisticsDesk.Models.Proveedor</class>
     <class>com.EnderFire.PALogisticsDesk.Models.Pedido</class>
     <class>com.EnderFire.PALogisticsDesk.Models.Transportista</class>
@@ -17,6 +16,7 @@
     <class>com.EnderFire.PALogisticsDesk.Models.RendimientoProveedor</class>
     <class>com.EnderFire.PALogisticsDesk.Models.InformacionContacto</class>
     <class>com.EnderFire.PALogisticsDesk.Models.CentroDistribucion</class>
+    <class>com.EnderFire.PALogisticsDesk.Models.Cliente</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://Oscar-NB\MSSQLSERVER:1433;databaseName=DBPATPI;encrypt=false"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>

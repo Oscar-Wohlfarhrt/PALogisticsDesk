@@ -43,10 +43,10 @@ public class Proveedor implements Serializable {
     @JoinColumn(referencedColumnName = "id")
     private RendimientoProveedor performance;
     //OrdenCompra un proveedor muchas ordenes(relacion 4)
-    @OneToMany(mappedBy = "Proveedor", cascade = CascadeType.ALL)
+    @OneToMany(/*mappedBy = "Proveedor",*/ cascade = CascadeType.ALL,targetEntity = OrdenCompra.class)
     List<OrdenCompra> order = new ArrayList<>();
     //Contrato(relacion5)
-    @OneToMany(mappedBy = "Proveedor", cascade = CascadeType.ALL)
+    @OneToMany(/*mappedBy = "Proveedor",*/ cascade = CascadeType.ALL,targetEntity = Contrato.class)
     List<Contrato> contract = new ArrayList<>();
     
     public Long getId() {
