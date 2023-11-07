@@ -4,6 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -23,7 +24,9 @@ public class Almacen implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @TableHeader(name = "Id Almacen",columnSize = 100)
     private Long id;
+    @TableHeader(name = "Nombre",columnSize = 150)
     private String name;
     
     @OneToOne(cascade = CascadeType.ALL)

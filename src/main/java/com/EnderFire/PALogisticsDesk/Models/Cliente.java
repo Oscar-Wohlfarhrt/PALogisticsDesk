@@ -4,7 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
-import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import javax.persistence.OneToOne;
  * @author Oscar2
  */
 @Entity
-public class Client implements Serializable, GenericEntity {
+public class Cliente implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,14 +37,14 @@ public class Client implements Serializable, GenericEntity {
     @TableHeader(name = "Nombre", columnSize = 300)
     private String name;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(/*mappedBy = "client",*/targetEntity = Preferencia.class, cascade = CascadeType.ALL)
     List<Preferencia> preferencias = new ArrayList<>();
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(/*mappedBy = "client",*/targetEntity = Pedido.class, cascade = CascadeType.ALL)
     private List<Pedido> pedidos = new ArrayList<>();
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = InformacionContacto.class)
+    //@JoinColumn(referencedColumnName = "id")
     private InformacionContacto contactInfo;
       
     public Long getId() {
@@ -81,10 +81,10 @@ public class Client implements Serializable, GenericEntity {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Client)) {
+        if (!(object instanceof Cliente)) {
             return false;
         }
-        Client other = (Client) object;
+        Cliente other = (Cliente) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

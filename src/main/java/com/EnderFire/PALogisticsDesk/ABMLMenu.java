@@ -107,7 +107,7 @@ public class ABMLMenu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Listar Cleintes
-        new TableViewTest(Client.class).setVisible(true);
+        new TableViewTest(Cliente.class).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -117,17 +117,20 @@ public class ABMLMenu extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //Load test
-        GenericJpaController<Client> cjc=new GenericJpaController(Client.class);
+        GenericJpaController<Cliente> cjc=new GenericJpaController(Cliente.class);
         
-        Client test = new Client();
+        Cliente test = new Cliente();
         test.setId(1L);
         test.setName("Oscar Wohlfarhrt 4");
+        
         Pedido ped = new Pedido();
         ped.setName("Pedido 3");
         ped.setClient(test);
         //ped.setId(1L);
         test.getPedidos().add(ped);
-        Client test2 = new Client();
+        
+        
+        Cliente test2 = new Cliente();
         test2.setId(2L);
         test2.setName("Oscar Wohlfarhrt 5");
         Pedido ped2 = new Pedido();

@@ -30,11 +30,11 @@ public class Mercancia implements Serializable {
     private String descirption;
     private Float value;
     
-    @ManyToMany
+    @ManyToMany(targetEntity = Proveedor.class)
     private List<Proveedor> supplier;
     
-     @ManyToMany(mappedBy = "merchandise")
-     private List<OrdenCompra> order = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY,targetEntity = OrdenCompra.class)
+    private List<OrdenCompra> order;
             
     public Long getId() {
         return id;

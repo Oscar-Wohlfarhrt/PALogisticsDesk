@@ -4,9 +4,15 @@
  */
 package com.EnderFire.PALogisticsDesk;
 
-import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
+import com.EnderFire.PALogisticsDesk.Controls.GenericJpaController;
 import com.EnderFire.PALogisticsDesk.Models.*;
 import com.EnderFire.PALogisticsDesk.Utils.DynamicTable;
+import com.EnderFire.PALogisticsDesk.Utils.DynamicTableModel;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -16,6 +22,9 @@ import javax.swing.JTable;
 public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
 
     private Class<T> tClass;
+    private List<T> values;
+    private List<T> toRemove = new ArrayList<>();
+        GenericJpaController<T> jpac;
     /**
      * Creates new form TableViewTest
      */
@@ -23,10 +32,13 @@ public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
         this.tClass=tClass;
         initComponents();
         
+        jLabel1.setText(tClass.getSimpleName());
         //DynamicTable<Client> test = new DynamicTable<>(Client.class);
         DynamicTable<T> dTable = new DynamicTable<>(tClass);
         dTable.setJTableModels(jTable1);
-        DynamicTable.LoadTableFromJPA(tClass, jTable1);
+        jpac = new GenericJpaController<>(tClass);
+        values=jpac.findEntityEntities();
+        ((DynamicTableModel<T>)jTable1.getModel()).setValues(values);
     }
 
     /**
@@ -40,6 +52,10 @@ public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,25 +72,108 @@ public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Del");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Clase mostrada");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try{
+        values.add(0, (T)tClass.getDeclaredConstructors()[0].newInstance());
+        jTable1.updateUI();
+        }
+        catch (InstantiationException| IllegalAccessException | InvocationTargetException e){
+            JOptionPane.showMessageDialog(this, "Error al crear un nuevo objeto");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int row = jTable1.getSelectedRow();
+        if(row>-1){
+            toRemove.add(values.remove(row));
+            jTable1.updateUI();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+        for(T ent:toRemove){
+            jpac.destroy(ent.getId());
+        }
+        for(T ent:values){
+            if(ent.getId()==null){
+                System.out.println("sin id");
+                jpac.create(ent);
+            }
+            else{
+                System.out.println(ent.getId());
+                jpac.edit(ent);
+            }
+        }
+        values=jpac.findEntityEntities();
+        ((DynamicTableModel<T>)jTable1.getModel()).setValues(values);
+        jTable1.updateUI();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -106,12 +205,16 @@ public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TableViewTest<Client>(Client.class).setVisible(true);
+                new TableViewTest<Cliente>(Cliente.class).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

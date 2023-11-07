@@ -4,7 +4,6 @@
  */
 package com.EnderFire.PALogisticsDesk.Utils;
 
-import com.EnderFire.PALogisticsDesk.Controls.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Controls.GenericJpaController;
 import com.sun.net.httpserver.Headers;
 import java.lang.reflect.Field;
@@ -84,7 +83,6 @@ public class DynamicTable<T extends GenericEntity> {
                     }
                     /*boxModel.addElement("Masculino");
                     boxModel.addElement("Femenino");*/
-                    
                     ops.setModel(boxModel);
                     tModel.setColumnClass(i, header.enumClass());
                     tCol.setCellEditor(new DefaultCellEditor(ops));

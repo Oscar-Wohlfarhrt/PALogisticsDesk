@@ -28,9 +28,8 @@ public class Ruta implements Serializable {
     private Long id;
     private String description;
     
-//FK
-    
-   @OneToMany(fetch = FetchType.LAZY)
+    //FK
+    @ManyToOne(fetch = FetchType.LAZY)
     private Transportista trans;
    
    @ManyToMany
