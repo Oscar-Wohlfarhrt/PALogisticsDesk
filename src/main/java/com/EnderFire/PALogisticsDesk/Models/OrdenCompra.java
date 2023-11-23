@@ -36,10 +36,7 @@ public class OrdenCompra implements Serializable {
     private Proveedor suplier;
     
     @ManyToMany
-    @JoinTable(
-        joinColumns = @JoinColumn(name = "id"),
-        inverseJoinColumns = @JoinColumn(name = "id")
-    )
+    @JoinTable(joinColumns = @JoinColumn(name = "id"),inverseJoinColumns = @JoinColumn(name = "id"))
     List<Mercancia> merchandise = new ArrayList<>();
 
     public Long getId() {

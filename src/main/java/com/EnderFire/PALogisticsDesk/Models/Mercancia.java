@@ -35,8 +35,11 @@ public class Mercancia implements Serializable {
     @ManyToMany(targetEntity = Proveedor.class)
     private List<Proveedor> supplier = new ArrayList<>();
     
-    @ManyToOne(fetch = FetchType.LAZY,targetEntity = OrdenCompra.class)
-    private List<OrdenCompra> order = new ArrayList<>();
+    /*@ManyToOne(fetch = FetchType.LAZY,targetEntity = OrdenCompra.class) //esta relacion deberia ser n a n
+    private List<OrdenCompra> order = new ArrayList<>();*/
+    
+    @ManyToMany(mappedBy = "mercancias")
+    private List<Pedido> pedidos = new ArrayList<>();
             
     public Long getId() {
         return id;

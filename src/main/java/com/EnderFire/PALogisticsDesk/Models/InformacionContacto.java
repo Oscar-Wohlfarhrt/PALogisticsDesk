@@ -24,7 +24,7 @@ public class InformacionContacto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long string;
+    private Long phone;
     private String email;
     private String address;
     

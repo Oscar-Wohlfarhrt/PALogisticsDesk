@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -31,8 +32,11 @@ public class Ruta implements Serializable {
     private String description;
     
     //FK
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Transportista trans;
+    
+    //private Transportista trans;
+    @OneToMany(mappedBy = "rutas")
+    private List<Transportista> trans = new ArrayList<>();
+    
    
    @ManyToMany
     private List<Ubicacion> locations = new ArrayList<>();

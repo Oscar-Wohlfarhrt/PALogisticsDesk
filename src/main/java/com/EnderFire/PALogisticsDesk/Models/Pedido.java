@@ -8,13 +8,18 @@ import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableData;
 import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+//falta la relacion con mercancia
 
 /**
  *
@@ -27,26 +32,30 @@ public class Pedido implements Serializable, GenericEntity {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @TableHeader(name = "ID",columnSize = 50)
+    @TableHeader(name = "ID", columnSize = 50)
     private Long id;
-    
+
     @Column(name = "Nombre")
-    @TableHeader(name = "Nombre",columnSize = 200)
+    @TableHeader(name = "Nombre", columnSize = 200)
     private String name;
-    
-    @TableHeader(name = "Estado",columnSize = 150)
+
+    @TableHeader(name = "Estado", columnSize = 150)
     private EstadosPedido state = EstadosPedido.NoDespachado;
-    @TableHeader(name = "Direccion de entrega",columnSize = 200)
+    @TableHeader(name = "Direccion de entrega", columnSize = 200)
     private String deliveryAddress = "Unknown";
 
-    @TableHeader(name = "Id de Cliente",columnSize = 200)
+    @TableHeader(name = "Id de Cliente", columnSize = 200)
     @ManyToOne(targetEntity = Cliente.class)
     private Cliente client;
-    
+
     @ManyToOne
     @JoinColumn
     private Ubicacion location;
-    
+
+    @ManyToMany
+    @JoinTable(name = "pedido_mercancia", joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "mercancia_id"))
+    private List<Mercancia> mercancias = new ArrayList<>();
+
     public Long getId() {
         return id;
     }
@@ -70,9 +79,9 @@ public class Pedido implements Serializable, GenericEntity {
     public void setClient(Cliente client) {
         this.client = client;
     }
-    
-    public Object[] getValues(){
-        return new Object[]{id,name,state,deliveryAddress,String.format("[%d] %s", client.getId(),client.getName())};
+
+    public Object[] getValues() {
+        return new Object[]{id, name, state, deliveryAddress, String.format("[%d] %s", client.getId(), client.getName())};
     }
 
     @Override
@@ -99,5 +108,5 @@ public class Pedido implements Serializable, GenericEntity {
     public String toString() {
         return String.format("[%d] %s", id, name);
     }
-    
+
 }
