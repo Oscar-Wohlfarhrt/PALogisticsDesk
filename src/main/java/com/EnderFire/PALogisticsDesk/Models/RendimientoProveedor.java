@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /**
@@ -26,7 +27,8 @@ public class RendimientoProveedor implements Serializable {
     private Float inTimeP;//P=porcentaje
     private Float deliveryErrorsP;//P=porcentaje
     
-    @OneToOne(mappedBy = "id",targetEntity = Proveedor.class)
+    @OneToOne(targetEntity = Proveedor.class)
+    @JoinColumn
     private Proveedor supplier;
 
     public Long getId() {

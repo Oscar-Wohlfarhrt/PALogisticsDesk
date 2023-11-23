@@ -43,7 +43,7 @@ public class Pedido implements Serializable, GenericEntity {
     private Cliente client;
     
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn
     private Ubicacion location;
     
     public Long getId() {

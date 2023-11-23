@@ -19,8 +19,7 @@ import javax.persistence.OneToOne;
 
 /**
  *
- * @author Oscar2
- * relaciones 5/5
+ * @author Oscar2 relaciones 5/5
  */
 @Entity
 public class Proveedor implements Serializable {
@@ -39,16 +38,15 @@ public class Proveedor implements Serializable {
     @ManyToMany
     private List<Mercancia> merch;
     //Rendimiento(relacion 3)
-    @OneToOne(cascade = CascadeType.ALL)/*rendimiento proveedor*/
-    @JoinColumn(referencedColumnName = "id")
+    @OneToOne(mappedBy = "supplier", cascade = CascadeType.ALL)/*rendimiento proveedor*/
     private RendimientoProveedor performance;
     //OrdenCompra un proveedor muchas ordenes(relacion 4)
     @OneToMany(mappedBy = "suplier", cascade = CascadeType.ALL)
     List<OrdenCompra> order = new ArrayList<>();
     //Contrato(relacion5)
-    @OneToMany(mappedBy = "suplier", cascade = CascadeType.ALL)
-    List<Contrato> contract = new ArrayList<>();
-    
+    @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
+    private List<Contrato> contratos = new ArrayList<>();
+
     public Long getId() {
         return id;
     }
@@ -81,5 +79,5 @@ public class Proveedor implements Serializable {
     public String toString() {
         return "com.EnderFire.PALogisticsDesk.Models.Proveedor[ id=" + id + " ]";
     }
-    
+
 }

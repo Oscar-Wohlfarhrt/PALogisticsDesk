@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -29,7 +30,7 @@ public class Transportista implements Serializable {
     private Float costs;
     //FK
     
-    @ManyToOne
+    @OneToMany(mappedBy = "trans")
     private List<Ruta> rutas = new ArrayList<>();
 
     public Long getId() {

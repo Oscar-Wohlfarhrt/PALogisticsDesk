@@ -29,7 +29,7 @@ public class CentroDistribucion implements Serializable {
     private Period timeOpen;
     
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @JoinColumn
     private Ubicacion location;
 
     public Long getId() {

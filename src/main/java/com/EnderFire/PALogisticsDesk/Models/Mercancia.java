@@ -31,7 +31,7 @@ public class Mercancia implements Serializable {
     private Float value;
     
     @ManyToMany(targetEntity = Proveedor.class)
-    private List<Proveedor> supplier;
+    private List<Proveedor> supplier = new ArrayList<>();
     
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = OrdenCompra.class)
     private List<OrdenCompra> order = new ArrayList<>();

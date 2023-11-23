@@ -30,7 +30,7 @@ public class Almacen implements Serializable {
     private String name;
     
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @JoinColumn
     private Ubicacion location;
 
     public Long getId() {
