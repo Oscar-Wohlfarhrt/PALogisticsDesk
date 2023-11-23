@@ -17,7 +17,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface TableHeader {
     String name();
-    int columnType() default ColumnType.TEXTFIELD;
-    Class<?> enumClass() default Object.class;
     int columnSize() default 0;
 }

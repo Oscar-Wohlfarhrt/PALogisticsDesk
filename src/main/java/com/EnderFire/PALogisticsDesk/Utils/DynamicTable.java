@@ -39,8 +39,6 @@ public class DynamicTable<T extends GenericEntity> {
     }
     public void setJTableModels(JTable jTable,boolean autoColResize){
         Field[] fields=getDynTableFields(classType).toArray(Field[]::new);
-        //TableHeader[] headers = getTableHeadersAnnotation().toArray(TableHeader[]::new);
-        
         DynamicTableModel<T> tModel = new DynamicTableModel<>(classType);
         
         jTable.setModel(tModel);
@@ -48,7 +46,6 @@ public class DynamicTable<T extends GenericEntity> {
             jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         TableColumnModel cModel = jTable.getColumnModel();
         int i =0;
-        //for(TableHeader header:headers){
         for(Field field:fields){
             TableHeader header = field.getAnnotation(TableHeader.class);
             TableColumn tCol = cModel.getColumn(i);
@@ -61,30 +58,6 @@ public class DynamicTable<T extends GenericEntity> {
                     tCol.setPreferredWidth(200);
                 }
             }
-            
-            //JCheckBox checkbox = new JCheckBox();
-            /*switch(header.columnType()){
-                case ColumnType.COMBOBOX:
-                    DefaultComboBoxModel<String> boxModel = new DefaultComboBoxModel<>();
-                    
-                    int iIndex=Arrays.asList(header.enumClass().getInterfaces()).indexOf(GenericEntity.class);
-                    if(iIndex<0){
-                        List<String> options = Arrays.stream(header.enumClass().getEnumConstants()).map((o)->o.toString()).toList();
-                        boxModel.addAll(options);
-                    }
-                    else{
-                        GenericJpaController<?> jpaEnum = new GenericJpaController(header.enumClass());
-                        boxModel.addAll(jpaEnum.findEntityEntities().stream().map((ent)->ent.toString()).toList());
-                    }
-                    ops.setModel(boxModel);
-                    tModel.setColumnClass(i, header.enumClass());
-                    tCol.setCellEditor(new DefaultCellEditor(ops));
-                    break;
-                case ColumnType.CHECKBOX:
-                    break;
-                default:
-                    break;
-            }*/
             JComboBox<String> ops = new JComboBox<>(){
                 @Override
                 public String toString(){
@@ -93,13 +66,13 @@ public class DynamicTable<T extends GenericEntity> {
             };
             DefaultComboBoxModel<String> boxModel = new DefaultComboBoxModel<>();
             if(field.getType().isEnum()){
-                List<String> options = Arrays.stream(header.enumClass().getEnumConstants()).map((o)->o.toString()).toList();
+                List<String> options = Arrays.stream(field.getType().getEnumConstants()).map((o)->o.toString()).toList();
                 boxModel.addAll(options);
                 ops.setModel(boxModel);
                 tCol.setCellEditor(new DefaultCellEditor(ops));
             }
-            else if(Arrays.asList(header.enumClass().getInterfaces()).indexOf(GenericEntity.class)>0){
-                GenericJpaController<?> jpaEnum = new GenericJpaController(header.enumClass());
+            else if(Arrays.asList(field.getType().getInterfaces()).indexOf(GenericEntity.class)>0){
+                GenericJpaController<?> jpaEnum = new GenericJpaController(field.getType());
                 boxModel.addAll(jpaEnum.findEntityEntities().stream().map((ent)->ent.toString()).toList());
                 ops.setModel(boxModel);
                 tCol.setCellEditor(new DefaultCellEditor(ops));
@@ -119,12 +92,6 @@ public class DynamicTable<T extends GenericEntity> {
             return jpaEnum.findEntityEntities().stream().map((ent)->ent.toString()).toList();
         }
     }
-    /*public static <T extends GenericEntity> T getObjectFromEnumString(Class<T> tClass, String){
-        
-        GenericJpaController<?> jpaEnum = new GenericJpaController(tClass);
-        
-        return jpaEnum.findEntity(1);
-    }*/
     
     public static <T> Long getIdFromEnumClass(Class<T> tClass, String value){
         Pattern enumIdPat = Pattern.compile("\\[.+?\\].*");
@@ -140,8 +107,6 @@ public class DynamicTable<T extends GenericEntity> {
         finally{
             return Long.valueOf(-1);
         }
-        
-        //return Long.valueOf(id);
     }
     
     public static <T extends GenericEntity> void LoadTableFromJPA(Class<T> eClass,JTable jTable){
@@ -149,29 +114,11 @@ public class DynamicTable<T extends GenericEntity> {
         List<T> list = gjc.findEntityEntities();
         DynamicTableModel tModel = (DynamicTableModel)jTable.getModel();
         tModel.setValues(list);
-        /*tModel.clearValues();
-        for(T ent:list){
-            tModel.addRow(ent.getValues());
-        }*/
-        /*tModel.addTableModelListener(new TableModelListener(){
-            @Override
-            public void tableChanged(TableModelEvent e) {
-                JpaTableCellUpdate(e,tModel,gjc);
-            }
-        });*/
     }
-    
-    /*private static void JpaTableCellUpdate(TableModelEvent evt,CustomTableModel ctm, GenericJpaController<?> jpaCtrl){
-        
-    }*/
     
     public static <T extends GenericEntity> void LoadTableFromList(List<T> list, JTable jTable){
         DynamicTableModel tModel = (DynamicTableModel)jTable.getModel();
         tModel.setValues(list);
-        /*tModel.clearValues();
-        for(T ent:list){
-            tModel.addRow(ent);
-        }*/
     }
     
     public static <T extends GenericEntity> Stream<Field> getDynTableFields(Class<T> tClass){
