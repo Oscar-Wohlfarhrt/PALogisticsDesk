@@ -25,7 +25,6 @@ import javax.swing.table.TableModel;
  */
 
 public class DynamicTableModel<T extends GenericEntity> extends AbstractTableModel implements TableModel {
-    //private List<Class<?>> types = new ArrayList<>();
     private Class<?>[] typesArr;
     private List<T> values = new ArrayList<>();
     private Field[] tFields;
@@ -54,21 +53,6 @@ public class DynamicTableModel<T extends GenericEntity> extends AbstractTableMod
     public int getRowCount() {
         return values.size();
     }
-    
-    /*public void setColumnCount(int size){
-        types.clear();
-        values.clear();
-        List<Object> vals = new ArrayList<>();
-        for(int i =0;i<size;i++){
-            types.add(Object.class);
-            vals.add("");
-        }
-       
-        values.add(vals.toArray());
-        values.add(vals.toArray());
-        values.add(vals.toArray());
-        values.add(vals.toArray());
-    }*/
 
     @Override
     public int getColumnCount() {
@@ -129,19 +113,12 @@ public class DynamicTableModel<T extends GenericEntity> extends AbstractTableMod
     public void addRow(T row){
         values.add(row);
     }
-    /*public void setRow(int index, T row){
-        values.set(index, row);
-    }*/
+    
     public void clearValues(){
         values.clear();
     }
     
     public boolean isCellEditable(int row, int col) {
         return !tFields[col].isAnnotationPresent(Id.class);
-        /*if (col < 1) {
-            return false;
-        } else {
-            return true;
-        }*/
     }
 }

@@ -22,11 +22,11 @@ public class InformacionContacto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long String;
+    private Long string;
     private String email;
     private String address;
     
-    @OneToOne(targetEntity = Cliente.class)//mappedBy = "Cliente",
+    @OneToOne(targetEntity = Cliente.class)
     private Cliente client;
 
     public Long getId() {
@@ -61,7 +61,6 @@ public class InformacionContacto implements Serializable {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.InformacionContacto[ id=" + id + " ]";
+        return String.format("[%d] %s", id, email);
     }
-    
 }

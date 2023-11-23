@@ -59,7 +59,6 @@ public class Preferencia implements Serializable {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.Preferencia[ id=" + id + " ]";
+        return String.format("[%d] %s", id, description);
     }
-    
 }

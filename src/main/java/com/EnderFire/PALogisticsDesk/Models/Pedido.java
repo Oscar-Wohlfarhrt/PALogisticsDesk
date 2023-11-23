@@ -95,7 +95,7 @@ public class Pedido implements Serializable, GenericEntity {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.Pedidos[ id=" + id + " ]";
+        return String.format("[%d] %s", id, name);
     }
     
 }

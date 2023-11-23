@@ -59,7 +59,6 @@ public class Contrato implements Serializable {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.Contrato[ id=" + id + " ]";
-    }
-    
+        return String.format("[%d] %s", id, description);
+    }    
 }

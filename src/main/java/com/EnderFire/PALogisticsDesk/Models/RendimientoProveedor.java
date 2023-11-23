@@ -61,7 +61,6 @@ public class RendimientoProveedor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.RendimientoProveedor[ id=" + id + " ]";
+        return String.format("[%d] Rendimiento de %s", id, supplier.getName());
     }
-    
 }

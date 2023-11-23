@@ -70,7 +70,7 @@ public class OrdenCompra implements Serializable {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.OrdenCompra[ id=" + id + " ]";
+        return String.format("[%d] %s (total: $%.2f)", id, "Orden de compra",totalCost);
     }
     
 }

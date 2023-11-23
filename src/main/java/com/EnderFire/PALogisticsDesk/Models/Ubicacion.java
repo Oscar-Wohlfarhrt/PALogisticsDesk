@@ -62,7 +62,7 @@ public class Ubicacion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.Ubicacion[ id=" + id + " ]";
+        return String.format("[%d] %s", id, name);
     }
     
 }

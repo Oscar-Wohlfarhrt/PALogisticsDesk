@@ -62,7 +62,6 @@ public class CentroDistribucion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.CentroDistribucion[ id=" + id + " ]";
+        return String.format("[%d] %s", id, name);
     }
-    
 }

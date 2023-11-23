@@ -65,7 +65,7 @@ public class Ruta implements Serializable {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.Ruta[ id=" + id + " ]";
+        return String.format("[%d] %s", id, description);
     }
     
 }

@@ -55,6 +55,11 @@ public class Proveedor implements Serializable {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -77,7 +82,6 @@ public class Proveedor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.Proveedor[ id=" + id + " ]";
+        return String.format("[%d] %s", id, name);
     }
-
 }

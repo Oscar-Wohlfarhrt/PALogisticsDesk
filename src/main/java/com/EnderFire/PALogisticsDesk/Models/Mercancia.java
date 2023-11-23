@@ -27,7 +27,7 @@ public class Mercancia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String descirption;
+    private String description;
     private Float value;
     
     @ManyToMany(targetEntity = Proveedor.class)
@@ -66,7 +66,7 @@ public class Mercancia implements Serializable {
 
     @Override
     public String toString() {
-        return "com.EnderFire.PALogisticsDesk.Models.Mercancia[ id=" + id + " ]";
+        return String.format("[%d] %s (p/u: $%.2f)", id, description,value);
     }
     
 }
