@@ -61,7 +61,6 @@ public class DynamicTableModel<T extends GenericEntity> extends AbstractTableMod
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        //return values.get(rowIndex).getValue(columnIndex);
         try{
             Object val = tFields[columnIndex].get(values.get(rowIndex));
             return typesArr[columnIndex].cast(val);

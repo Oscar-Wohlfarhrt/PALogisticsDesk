@@ -4,6 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.TableData;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +18,7 @@ import javax.persistence.ManyToOne;
  * @author Oscar2
  */
 @Entity
+@TableData(name = "Preferencias")
 public class Preferencia implements Serializable {
 
     private static final long serialVersionUID = 1L;

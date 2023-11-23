@@ -5,6 +5,7 @@
 package com.EnderFire.PALogisticsDesk.Models;
 
 import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
+import com.EnderFire.PALogisticsDesk.Utils.TableData;
 import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import javax.persistence.OneToOne;
  * @author Oscar2
  */
 @Entity
+@TableData(name = "Clientes")
 public class Cliente implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;

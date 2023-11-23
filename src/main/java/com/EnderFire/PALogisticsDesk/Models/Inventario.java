@@ -4,6 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.TableData;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
  * @author Oscar2
  */
 @Entity
+@TableData(name = "Inventarios")
 public class Inventario implements Serializable {
 
     private static final long serialVersionUID = 1L;

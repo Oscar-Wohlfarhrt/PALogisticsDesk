@@ -4,6 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.TableData;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import javax.persistence.OneToMany;
  * @author Oscar2
  */
 @Entity
+@TableData(name = "Transportistas")
 public class Transportista implements Serializable {
 
     private static final long serialVersionUID = 1L;

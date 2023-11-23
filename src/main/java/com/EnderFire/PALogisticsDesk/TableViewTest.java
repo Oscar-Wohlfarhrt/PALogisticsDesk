@@ -9,6 +9,7 @@ import com.EnderFire.PALogisticsDesk.Controls.GenericJpaController;
 import com.EnderFire.PALogisticsDesk.Models.*;
 import com.EnderFire.PALogisticsDesk.Utils.DynamicTable;
 import com.EnderFire.PALogisticsDesk.Utils.DynamicTableModel;
+import com.EnderFire.PALogisticsDesk.Utils.TableData;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,13 +33,16 @@ public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
         this.tClass=tClass;
         initComponents();
         
-        jLabel1.setText(tClass.getSimpleName());
-        //DynamicTable<Client> test = new DynamicTable<>(Client.class);
+        if(tClass.isAnnotationPresent(TableData.class))
+            TableName.setText(tClass.getAnnotation(TableData.class).name());
+        else
+            TableName.setText(tClass.getSimpleName());
+        
         DynamicTable<T> dTable = new DynamicTable<>(tClass);
-        dTable.setJTableModels(jTable1);
+        dTable.setJTableModels(DataTable);
         jpac = new GenericJpaController<>(tClass);
         values=jpac.findEntityEntities();
-        ((DynamicTableModel<T>)jTable1.getModel()).setValues(values);
+        ((DynamicTableModel<T>)DataTable.getModel()).setValues(values);
     }
 
     /**
@@ -51,15 +55,15 @@ public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        DataTable = new javax.swing.JTable();
+        SaveTableBut = new javax.swing.JButton();
+        AddEntryBut = new javax.swing.JButton();
+        DelEntryBut = new javax.swing.JButton();
+        TableName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        DataTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -70,31 +74,31 @@ public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(DataTable);
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        SaveTableBut.setText("Save table");
+        SaveTableBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                SaveTableButActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Add");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        AddEntryBut.setText("Add entry");
+        AddEntryBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                AddEntryButActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Del");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        DelEntryBut.setText("Del entry");
+        DelEntryBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                DelEntryButActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Clase mostrada");
+        TableName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        TableName.setText("Clase mostrada");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,14 +108,14 @@ public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(AddEntryBut)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(DelEntryBut)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(SaveTableBut))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(TableName)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -119,39 +123,39 @@ public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(TableName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(SaveTableBut)
+                    .addComponent(AddEntryBut)
+                    .addComponent(DelEntryBut))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void AddEntryButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEntryButActionPerformed
         try{
         values.add(0, (T)tClass.getDeclaredConstructors()[0].newInstance());
-        jTable1.updateUI();
+        DataTable.updateUI();
         }
         catch (InstantiationException| IllegalAccessException | InvocationTargetException e){
             JOptionPane.showMessageDialog(this, "Error al crear un nuevo objeto");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_AddEntryButActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int row = jTable1.getSelectedRow();
+    private void DelEntryButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelEntryButActionPerformed
+        int row = DataTable.getSelectedRow();
         if(row>-1){
             toRemove.add(values.remove(row));
-            jTable1.updateUI();
+            DataTable.updateUI();
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_DelEntryButActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void SaveTableButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveTableButActionPerformed
         try{
         for(T ent:toRemove){
             jpac.destroy(ent.getId());
@@ -167,13 +171,13 @@ public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
             }
         }
         values=jpac.findEntityEntities();
-        ((DynamicTableModel<T>)jTable1.getModel()).setValues(values);
-        jTable1.updateUI();
+        ((DynamicTableModel<T>)DataTable.getModel()).setValues(values);
+        DataTable.updateUI();
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_SaveTableButActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,11 +215,11 @@ public class TableViewTest<T extends GenericEntity> extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton AddEntryBut;
+    private javax.swing.JTable DataTable;
+    private javax.swing.JButton DelEntryBut;
+    private javax.swing.JButton SaveTableBut;
+    private javax.swing.JLabel TableName;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

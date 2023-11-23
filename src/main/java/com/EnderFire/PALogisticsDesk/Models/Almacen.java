@@ -4,6 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.TableData;
 import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
@@ -19,6 +20,7 @@ import javax.persistence.OneToOne;
  * @author Oscar2
  */
 @Entity
+@TableData(name = "Almacenes")
 public class Almacen implements Serializable {
 
     private static final long serialVersionUID = 1L;

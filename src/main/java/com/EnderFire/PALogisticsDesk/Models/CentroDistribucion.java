@@ -4,6 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.TableData;
 import java.io.Serializable;
 import java.time.Period;
 import javax.persistence.CascadeType;
@@ -19,6 +20,7 @@ import javax.persistence.OneToOne;
  * @author Oscar2
  */
 @Entity
+@TableData(name = "Centros de Distribucion")
 public class CentroDistribucion implements Serializable {
 
     private static final long serialVersionUID = 1L;
