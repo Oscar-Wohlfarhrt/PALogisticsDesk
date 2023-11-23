@@ -38,7 +38,7 @@ public class Ruta implements Serializable, GenericEntity {
     //FK
     
     //private Transportista trans;
-    @OneToMany(mappedBy = "rutas")
+    @OneToMany(mappedBy = "rutas",targetEntity = Transportista.class)
     private List<Transportista> trans = new ArrayList<>();
     
    

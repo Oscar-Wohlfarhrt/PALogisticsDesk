@@ -23,6 +23,9 @@ import javax.persistence.criteria.Root;
  */
 public class GenericJpaController<T extends GenericEntity> implements Serializable {
     static protected EntityManagerFactory staticEMF = Persistence.createEntityManagerFactory("PALogisticsDeskPU");
+    public static EntityManagerFactory getEMF(){
+        return staticEMF;
+    }
 
     public GenericJpaController(Class<T> eClass){
         this(eClass,staticEMF);
