@@ -38,19 +38,19 @@ public class DynamicTable<T extends GenericEntity> {
         setJTableModels(jTable, false);
     }
     public void setJTableModels(JTable jTable,boolean autoColResize){
-        TableHeader[] headers = getTableHeadersAnnotation().toArray(TableHeader[]::new);
-        //String[] hNames = headers.map((h)->h.name()).toArray(String[]::new);
-        //System.out.println("Headers: "+String.join("; ", getTableHeaders()));
-        //headers.forEach((h)->{System.out.println(h.name()+"; ");});
+        Field[] fields=getDynTableFields(classType).toArray(Field[]::new);
+        //TableHeader[] headers = getTableHeadersAnnotation().toArray(TableHeader[]::new);
+        
         DynamicTableModel<T> tModel = new DynamicTableModel<>(classType);
-        //tModel.setColumnCount(headers.length);
+        
         jTable.setModel(tModel);
         if(!autoColResize)
             jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         TableColumnModel cModel = jTable.getColumnModel();
         int i =0;
-        for(TableHeader header:headers){
-            
+        //for(TableHeader header:headers){
+        for(Field field:fields){
+            TableHeader header = field.getAnnotation(TableHeader.class);
             TableColumn tCol = cModel.getColumn(i);
             tCol.setHeaderValue(header.name());
             if(!autoColResize){
@@ -61,14 +61,9 @@ public class DynamicTable<T extends GenericEntity> {
                     tCol.setPreferredWidth(200);
                 }
             }
-            JComboBox<String> ops = new JComboBox<>(){
-                @Override
-                public String toString(){
-                    return getSelectedItem().toString();
-                }
-            };
-            JCheckBox checkbox = new JCheckBox();
-            switch(header.columnType()){
+            
+            //JCheckBox checkbox = new JCheckBox();
+            /*switch(header.columnType()){
                 case ColumnType.COMBOBOX:
                     DefaultComboBoxModel<String> boxModel = new DefaultComboBoxModel<>();
                     
@@ -81,23 +76,34 @@ public class DynamicTable<T extends GenericEntity> {
                         GenericJpaController<?> jpaEnum = new GenericJpaController(header.enumClass());
                         boxModel.addAll(jpaEnum.findEntityEntities().stream().map((ent)->ent.toString()).toList());
                     }
-                    /*boxModel.addElement("Masculino");
-                    boxModel.addElement("Femenino");*/
                     ops.setModel(boxModel);
                     tModel.setColumnClass(i, header.enumClass());
                     tCol.setCellEditor(new DefaultCellEditor(ops));
                     break;
                 case ColumnType.CHECKBOX:
-                    //tCol.setCellEditor(new DefaultCellEditor(checkbox));
-                    //tModel.setColumnClass(i, Boolean.class);
                     break;
                 default:
-                    //tModel.setColumnClass(i, String.class);
                     break;
-            }
-            /*if(i==2){
-                    tModel.setColumnClass(i, JComboBox.class);
             }*/
+            JComboBox<String> ops = new JComboBox<>(){
+                @Override
+                public String toString(){
+                    return getSelectedItem().toString();
+                }
+            };
+            DefaultComboBoxModel<String> boxModel = new DefaultComboBoxModel<>();
+            if(field.getType().isEnum()){
+                List<String> options = Arrays.stream(header.enumClass().getEnumConstants()).map((o)->o.toString()).toList();
+                boxModel.addAll(options);
+                ops.setModel(boxModel);
+                tCol.setCellEditor(new DefaultCellEditor(ops));
+            }
+            else if(Arrays.asList(header.enumClass().getInterfaces()).indexOf(GenericEntity.class)>0){
+                GenericJpaController<?> jpaEnum = new GenericJpaController(header.enumClass());
+                boxModel.addAll(jpaEnum.findEntityEntities().stream().map((ent)->ent.toString()).toList());
+                ops.setModel(boxModel);
+                tCol.setCellEditor(new DefaultCellEditor(ops));
+            }
             i++;
         }
         jTable.setColumnModel(cModel);
