@@ -75,7 +75,8 @@ public class UserSelectForm extends javax.swing.JFrame {
     }//GEN-LAST:event_AdminButActionPerformed
 
     private void UserButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserButActionPerformed
-        
+        new UserForm().setVisible(true);
+        dispose();
     }//GEN-LAST:event_UserButActionPerformed
 
     /**

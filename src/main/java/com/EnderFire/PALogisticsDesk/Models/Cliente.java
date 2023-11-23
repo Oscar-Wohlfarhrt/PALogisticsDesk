@@ -38,10 +38,10 @@ public class Cliente implements Serializable, GenericEntity {
     @TableHeader(name = "Nombre", columnSize = 300)
     private String name;
 
-    @OneToMany(/*mappedBy = "client",*/targetEntity = Preferencia.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Preferencia.class, cascade = CascadeType.ALL)
     List<Preferencia> preferencias = new ArrayList<>();
 
-    @OneToMany(/*mappedBy = "client",*/targetEntity = Pedido.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Pedido.class, cascade = CascadeType.ALL)
     private List<Pedido> pedidos = new ArrayList<>();
     
     @OneToOne(cascade = CascadeType.ALL, targetEntity = InformacionContacto.class)
