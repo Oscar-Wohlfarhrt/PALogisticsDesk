@@ -53,7 +53,7 @@ public class Pedido implements Serializable, GenericEntity {
     private Ubicacion location;
 
     @ManyToMany
-    @JoinTable(name = "pedido_mercancia", joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "mercancia_id"))
+    @JoinTable(joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "mercancia_id"))
     private List<Mercancia> mercancias = new ArrayList<>();
 
     public Long getId() {

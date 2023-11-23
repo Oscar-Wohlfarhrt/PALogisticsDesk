@@ -28,7 +28,7 @@ public class Contrato implements Serializable {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "proveedor_id")
+    @JoinColumn
     private Proveedor proveedor;
 
     public Long getId() {

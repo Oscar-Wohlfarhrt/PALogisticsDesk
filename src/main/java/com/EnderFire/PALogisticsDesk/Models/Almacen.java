@@ -7,13 +7,18 @@ package com.EnderFire.PALogisticsDesk.Models;
 import com.EnderFire.PALogisticsDesk.Utils.TableData;
 import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+//agregar una lista de mercancias
 
 /**
  *
@@ -26,14 +31,18 @@ public class Almacen implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @TableHeader(name = "Id Almacen",columnSize = 100)
+    @TableHeader(name = "Id Almacen", columnSize = 100)
     private Long id;
-    @TableHeader(name = "Nombre",columnSize = 150)
+    @TableHeader(name = "Nombre", columnSize = 150)
     private String name;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Ubicacion location;
+
+    @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "almacen_id"),inverseJoinColumns = @JoinColumn(name = "mercancia_id") )
+    private List<Mercancia> mercancias = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -67,5 +76,5 @@ public class Almacen implements Serializable {
     public String toString() {
         return String.format("[%d] %s", id, name);
     }
-    
+
 }

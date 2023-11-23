@@ -40,6 +40,9 @@ public class Mercancia implements Serializable {
     
     @ManyToMany(mappedBy = "mercancias")
     private List<Pedido> pedidos = new ArrayList<>();
+    
+    @ManyToMany(mappedBy = "mercancias")
+    private List<Almacen> almacenes = new ArrayList<>();
             
     public Long getId() {
         return id;
