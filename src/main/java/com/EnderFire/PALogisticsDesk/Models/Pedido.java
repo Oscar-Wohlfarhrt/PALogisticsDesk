@@ -80,10 +80,6 @@ public class Pedido implements Serializable, GenericEntity {
         this.client = client;
     }
 
-    public Object[] getValues() {
-        return new Object[]{id, name, state, deliveryAddress, String.format("[%d] %s", client.getId(), client.getName())};
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;

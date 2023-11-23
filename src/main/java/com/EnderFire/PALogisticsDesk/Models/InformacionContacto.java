@@ -4,7 +4,9 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableData;
+import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,14 +20,18 @@ import javax.persistence.OneToOne;
  */
 @Entity
 @TableData(name = "Informacion de Contacto")
-public class InformacionContacto implements Serializable {
+public class InformacionContacto implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @TableHeader(name = "ID", columnSize = 50)
     private Long id;
-    private Long phone;
+    @TableHeader(name = "Telefono",columnSize = 200)
+    private String phone;
+    @TableHeader(name = "Email",columnSize = 200)
     private String email;
+    @TableHeader(name = "Direccion",columnSize = 200)
     private String address;
     
     @OneToOne(targetEntity = Cliente.class)

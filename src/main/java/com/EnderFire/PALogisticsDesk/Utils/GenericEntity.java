@@ -10,5 +10,4 @@ package com.EnderFire.PALogisticsDesk.Utils;
  */
 public interface GenericEntity {
     public Long getId();
-    public Object[] getValues();
 }

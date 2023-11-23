@@ -4,7 +4,9 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableData;
+import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,14 +21,17 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 @TableData(name = "Preferencias")
-public class Preferencia implements Serializable {
+public class Preferencia implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @TableHeader(name = "ID", columnSize = 50)
     private Long id;
+    @TableHeader(name = "Descripcion",columnSize = 200)
     private String description;
 
+    @TableHeader(name = "Cliente",columnSize = 200)
     @ManyToOne(fetch = FetchType.LAZY,targetEntity = Cliente.class)
     private Cliente client;
     

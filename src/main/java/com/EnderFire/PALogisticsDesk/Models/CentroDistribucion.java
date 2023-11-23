@@ -4,7 +4,9 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableData;
+import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import java.time.Period;
 import javax.persistence.CascadeType;
@@ -21,12 +23,14 @@ import javax.persistence.OneToOne;
  */
 @Entity
 @TableData(name = "Centros de Distribucion")
-public class CentroDistribucion implements Serializable {
+public class CentroDistribucion implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @TableHeader(name = "ID", columnSize = 50)
     private Long id;
+    @TableHeader(name = "Nombre",columnSize = 200)
     private String name;
     private Period timeOpen;
     

@@ -4,7 +4,9 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableData;
+import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +22,18 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @TableData(name = "Ubicaciones")
-public class Ubicacion implements Serializable {
+public class Ubicacion implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @TableHeader(name = "ID", columnSize = 50)
     private Long id;
+    @TableHeader(name = "Nombre",columnSize = 200)
     private String name;
+    @TableHeader(name = "Latitud",columnSize = 200)
     private String latitude; //revisar el tipo de dato. Por la naturaleza de la coordenada hay que especificar si es norte o sur y expresarse en grados sexagesimales con sus minutos y segundos respectivos
+    @TableHeader(name = "Longitud",columnSize = 200)
     private String longitude;//revisar el tipo de dato
    
     @OneToMany(mappedBy = "location")

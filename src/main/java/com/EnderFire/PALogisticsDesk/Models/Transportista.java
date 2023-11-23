@@ -4,7 +4,9 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableData;
+import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,18 +25,23 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @TableData(name = "Transportistas")
-public class Transportista implements Serializable {
+public class Transportista implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @TableHeader(name = "ID", columnSize = 50)
     private Long id;
+    @TableHeader(name = "Nombre",columnSize = 200)
     private String name;
+    @TableHeader(name = "Salario",columnSize = 200)
     private Float salary;
+    @TableHeader(name = "Costos",columnSize = 200)
     private Float costs;
     //FK
     
     @ManyToOne(fetch = FetchType.LAZY)
+    @TableHeader(name = "Ruta Asignada",columnSize = 200)
     private Ruta rutas;
 
     public Long getId() {

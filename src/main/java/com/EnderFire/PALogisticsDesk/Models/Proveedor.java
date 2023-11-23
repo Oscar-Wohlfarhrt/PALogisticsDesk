@@ -4,7 +4,9 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableData;
+import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,29 +26,34 @@ import javax.persistence.OneToOne;
  */
 @Entity
 @TableData(name = "Proveedores")
-public class Proveedor implements Serializable {
+public class Proveedor implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableHeader(name = "ID", columnSize = 50)
     private Long id;
+    @TableHeader(name = "Nombre",columnSize = 200)
     private String name;
+    @TableHeader(name = "Marca de productos",columnSize = 200)
     private String productBrand;
     //Informacion contacto (relacion 1)
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "id")
+    @TableHeader(name = "Informacion de Contacto",columnSize = 200)
     private InformacionContacto contactInfo;
     //Mercancia(relacion 2)
     @ManyToMany
     private List<Mercancia> merch;
     //Rendimiento(relacion 3)
-    @OneToOne(mappedBy = "supplier", cascade = CascadeType.ALL)/*rendimiento proveedor*/
+    @OneToOne(mappedBy = "supplier",targetEntity = RendimientoProveedor.class, cascade = CascadeType.ALL)/*rendimiento proveedor*/
+    @TableHeader(name = "Rendimiento de Proveedor",columnSize = 200)
     private RendimientoProveedor performance;
     //OrdenCompra un proveedor muchas ordenes(relacion 4)
-    @OneToMany(mappedBy = "suplier", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "suplier",targetEntity = OrdenCompra.class, cascade = CascadeType.ALL)
     List<OrdenCompra> order = new ArrayList<>();
     //Contrato(relacion5)
-    @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Contrato.class, cascade = CascadeType.ALL)
     private List<Contrato> contratos = new ArrayList<>();
 
     public Long getId() {

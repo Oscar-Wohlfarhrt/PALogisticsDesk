@@ -4,6 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableData;
 import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
@@ -26,18 +27,23 @@ import javax.persistence.OneToOne;
  */
 @Entity
 @TableData(name = "Almacenes")
-public class Almacen implements Serializable {
+public class Almacen implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @TableHeader(name = "Id Almacen", columnSize = 100)
     private Long id;
+<<<<<<< Updated upstream
     @TableHeader(name = "Nombre", columnSize = 150)
+=======
+    @TableHeader(name = "Nombre",columnSize = 200)
+>>>>>>> Stashed changes
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
+    @TableHeader(name = "Ubicacion",columnSize = 200)
     private Ubicacion location;
 
     @ManyToMany

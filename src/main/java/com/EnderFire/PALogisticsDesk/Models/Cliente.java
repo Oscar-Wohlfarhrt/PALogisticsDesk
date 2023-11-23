@@ -31,7 +31,7 @@ public class Cliente implements Serializable, GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @TableHeader(name = "DNI", columnSize = 50)
+    @TableHeader(name = "ID", columnSize = 50)
     private Long id;
 
     @Column(name = "Nombre")
@@ -45,7 +45,7 @@ public class Cliente implements Serializable, GenericEntity {
     private List<Pedido> pedidos = new ArrayList<>();
     
     @OneToOne(cascade = CascadeType.ALL, targetEntity = InformacionContacto.class)
-    //@JoinColumn(referencedColumnName = "id")
+    @TableHeader(name = "Informacion de Contacto",columnSize = 200)
     private InformacionContacto contactInfo;
       
     public Long getId() {
@@ -66,10 +66,6 @@ public class Cliente implements Serializable, GenericEntity {
 
     public List<Pedido> getPedidos() {
         return pedidos;
-    }
-
-    public Object[] getValues() {
-        return new Object[]{id, name};
     }
 
     @Override

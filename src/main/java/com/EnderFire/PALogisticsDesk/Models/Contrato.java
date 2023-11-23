@@ -4,8 +4,11 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableData;
+import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,16 +22,23 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 @TableData(name = "Contratos")
-public class Contrato implements Serializable {
+public class Contrato implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @TableHeader(name = "ID", columnSize = 50)
     private Long id;
+    @TableHeader(name = "Descripcion",columnSize = 300)
     private String description;
 
+<<<<<<< Updated upstream
     @ManyToOne
     @JoinColumn
+=======
+    @ManyToOne(cascade = CascadeType.ALL)
+    @TableHeader(name = "Proveedor",columnSize = 200)
+>>>>>>> Stashed changes
     private Proveedor proveedor;
 
     public Long getId() {

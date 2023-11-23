@@ -4,7 +4,9 @@
  */
 package com.EnderFire.PALogisticsDesk.Models;
 
+import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableData;
+import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +26,14 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 @TableData(name = "Ordenes de Compra")
-public class OrdenCompra implements Serializable {
+public class OrdenCompra implements Serializable, GenericEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @TableHeader(name = "ID", columnSize = 50)
     private Long id;
+    @TableHeader(name = "Valor",columnSize = 200)
     private Float totalCost;
     
     @ManyToOne(fetch = FetchType.LAZY)
