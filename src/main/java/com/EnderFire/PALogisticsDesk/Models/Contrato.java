@@ -32,13 +32,8 @@ public class Contrato implements Serializable, GenericEntity {
     @TableHeader(name = "Descripcion",columnSize = 300)
     private String description;
 
-<<<<<<< Updated upstream
-    @ManyToOne
-    @JoinColumn
-=======
     @ManyToOne(cascade = CascadeType.ALL)
     @TableHeader(name = "Proveedor",columnSize = 200)
->>>>>>> Stashed changes
     private Proveedor proveedor;
 
     public Long getId() {

@@ -34,11 +34,7 @@ public class Almacen implements Serializable, GenericEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @TableHeader(name = "Id Almacen", columnSize = 100)
     private Long id;
-<<<<<<< Updated upstream
     @TableHeader(name = "Nombre", columnSize = 150)
-=======
-    @TableHeader(name = "Nombre",columnSize = 200)
->>>>>>> Stashed changes
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
