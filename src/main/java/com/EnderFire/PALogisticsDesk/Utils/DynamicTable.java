@@ -51,27 +51,36 @@ public class DynamicTable<T extends GenericEntity> {
             TableColumn tCol = cModel.getColumn(i);
             tCol.setHeaderValue(header.name());
             if(!autoColResize){
-                if(header.columnSize()>0){
+                if(header.columnSize()>-1){
                     tCol.setPreferredWidth(header.columnSize());
                 }
                 else{
                     tCol.setPreferredWidth(200);
                 }
             }
-            JComboBox<String> ops = new JComboBox<>(){
-                @Override
-                public String toString(){
-                    return getSelectedItem().toString();
-                }
-            };
-            DefaultComboBoxModel<String> boxModel = new DefaultComboBoxModel<>();
             if(field.getType().isEnum()){
+                JComboBox<String> ops = new JComboBox<>(){
+                    @Override
+                    public String toString(){
+                        return getSelectedItem().toString();
+                    }
+                };
+                DefaultComboBoxModel<String> boxModel = new DefaultComboBoxModel<>();
+                
                 List<String> options = Arrays.stream(field.getType().getEnumConstants()).map((o)->o.toString()).toList();
                 boxModel.addAll(options);
                 ops.setModel(boxModel);
                 tCol.setCellEditor(new DefaultCellEditor(ops));
             }
             else if(Arrays.asList(field.getType().getInterfaces()).indexOf(GenericEntity.class)>0){
+                JComboBox<String> ops = new JComboBox<>(){
+                    @Override
+                    public String toString(){
+                        return getSelectedItem().toString();
+                    }
+                };
+                DefaultComboBoxModel<String> boxModel = new DefaultComboBoxModel<>();
+                
                 GenericJpaController<?> jpaEnum = new GenericJpaController(field.getType());
                 boxModel.addAll(jpaEnum.findEntityEntities().stream().map((ent)->ent.toString()).toList());
                 ops.setModel(boxModel);

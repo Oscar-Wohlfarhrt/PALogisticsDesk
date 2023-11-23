@@ -17,5 +17,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface TableHeader {
     String name();
-    int columnSize() default 0;
+    int columnSize() default -1;
 }
