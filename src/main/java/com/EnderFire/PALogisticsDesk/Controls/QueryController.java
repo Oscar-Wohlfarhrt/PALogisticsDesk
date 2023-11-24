@@ -20,27 +20,19 @@ public class QueryController {
     }
 
     public static void qtest2() {//ahcer que esto no sea static (me daba pereza importar para la prueba
-
-        EntityManager entityManager = GenericJpaController.getEMF().createEntityManager();
-        DAO dao = new DAO(entityManager);
-
-        List<Pedido> resultados = dao.obtenerTodosPedidos();
+        GenericJpaController<Pedido> pJPA = new GenericJpaController<>(Pedido.class);
+        List<Pedido> resultados = pJPA.findEntityEntities();
 
         for (Pedido infoPedido : resultados) {
             System.out.println(infoPedido.getId());
         }
-
-        entityManager.close();
-
     }
 
     //INFORME DE PEDIDOS
     public static Integer informePedidosND() {
-        EntityManager entityManager = GenericJpaController.getEMF().createEntityManager();
-        DAO dao = new DAO(entityManager);
+        GenericJpaController<Pedido> pJPA = new GenericJpaController<>(Pedido.class);
         Integer count = 0;
-        //ArrayList<Integer> informe = new ArrayList<>();
-        List<Pedido> resultados = dao.obtenerTodosPedidos();
+        List<Pedido> resultados = pJPA.findEntityEntities();
         for (Pedido infoPedido : resultados) {
             if (infoPedido.getState() == EstadosPedido.NoDespachado) {//no funciona con un switch
                 count++;
@@ -51,11 +43,9 @@ public class QueryController {
     }
 
     public static Integer informePedidosD() {
-        EntityManager entityManager = GenericJpaController.getEMF().createEntityManager();
-        DAO dao = new DAO(entityManager);
+        GenericJpaController<Pedido> pJPA = new GenericJpaController<>(Pedido.class);
         Integer count = 0;
-        //ArrayList<Integer> informe = new ArrayList<>();
-        List<Pedido> resultados = dao.obtenerTodosPedidos();
+        List<Pedido> resultados = pJPA.findEntityEntities();
         for (Pedido infoPedido : resultados) {
             if (infoPedido.getState() == EstadosPedido.Despachado) {//no funciona con un switch
                 count++;
@@ -66,11 +56,9 @@ public class QueryController {
     }
 
     public static Integer informePedidosE() {
-        EntityManager entityManager = GenericJpaController.getEMF().createEntityManager();
-        DAO dao = new DAO(entityManager);
+        GenericJpaController<Pedido> pJPA = new GenericJpaController<>(Pedido.class);
         Integer count = 0;
-        //ArrayList<Integer> informe = new ArrayList<>();
-        List<Pedido> resultados = dao.obtenerTodosPedidos();
+        List<Pedido> resultados = pJPA.findEntityEntities();
         for (Pedido infoPedido : resultados) {
             if (infoPedido.getState() == EstadosPedido.Entregado) {//no funciona con un switch
                 count++;
@@ -88,11 +76,9 @@ public class QueryController {
      * @return Integer
      */
     public Integer informePedidosEC() {
-        EntityManager entityManager = GenericJpaController.getEMF().createEntityManager();
-        DAO dao = new DAO(entityManager);
+        GenericJpaController<Pedido> pJPA = new GenericJpaController<>(Pedido.class);
         Integer count = 0;
-        //ArrayList<Integer> informe = new ArrayList<>();
-        List<Pedido> resultados = dao.obtenerTodosPedidos();
+        List<Pedido> resultados = pJPA.findEntityEntities();
         for (Pedido infoPedido : resultados) {
             if (infoPedido.getState() == EstadosPedido.EnCamino) {//no funciona con un switch
                 count++;

@@ -23,7 +23,7 @@ public class DAO {
         this.entityManager = entityManager;
     }
 
-    public List<Pedido> obtenerTodosPedidos() {
+    private List<Pedido> obtenerTodosPedidos() {
         String jpql = "SELECT p FROM Pedido p";
         TypedQuery<Pedido> consulta = entityManager.createQuery(jpql, Pedido.class);
         return consulta.getResultList();
