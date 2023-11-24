@@ -16,7 +16,7 @@ import javax.swing.DefaultListModel;
  *
  * @author Oscar
  */
-public class InformePedidos extends javax.swing.JFrame {
+public class PedidosCliente extends javax.swing.JFrame {
 
     GenericJpaController<Cliente> cJPA = new GenericJpaController<>(Cliente.class);
     DefaultComboBoxModel<String> cliModel = new DefaultComboBoxModel<>();
@@ -26,7 +26,7 @@ public class InformePedidos extends javax.swing.JFrame {
     /**
      * Creates new form InformePedidos
      */
-    public InformePedidos() {
+    public PedidosCliente() {
         initComponents();
         clientes=cJPA.findEntityEntities();
         cliModel.addAll(clientes.stream().map(c-> c.toString()).toList());
@@ -116,7 +116,7 @@ public class InformePedidos extends javax.swing.JFrame {
         
         if(index>=0 && index<clientes.size()){
             pedModel.clear();
-            pedModel.addAll(clientes.get(index).getPedidos().stream().map(p->p.toString()).toList());
+            pedModel.addAll(clientes.get(index).getPedidos().stream().map(p->p.toDetailedString()).toList());
         }
     }//GEN-LAST:event_ComboClienteActionPerformed
 
@@ -137,20 +137,21 @@ public class InformePedidos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InformePedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PedidosCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InformePedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PedidosCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InformePedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PedidosCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InformePedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PedidosCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InformePedidos().setVisible(true);
+                new PedidosCliente().setVisible(true);
             }
         });
     }

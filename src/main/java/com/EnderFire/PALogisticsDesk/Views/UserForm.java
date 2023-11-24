@@ -95,7 +95,7 @@ public class UserForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PedClienteButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedClienteButActionPerformed
-        new InformePedidos().setVisible(true);
+        new PedidosCliente().setVisible(true);
     }//GEN-LAST:event_PedClienteButActionPerformed
 
     private void ReturnButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnButActionPerformed
