@@ -32,12 +32,13 @@ public class UserForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         PedClienteBut = new javax.swing.JButton();
         TransportistaRutaBut = new javax.swing.JButton();
+        TransportistaRutaBut1 = new javax.swing.JButton();
         ReturnBut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Admin Menu");
+        jLabel1.setText("User Menu");
 
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setLayout(new java.awt.GridLayout(4, 4, 5, 5));
@@ -57,6 +58,14 @@ public class UserForm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(TransportistaRutaBut);
+
+        TransportistaRutaBut1.setText("Actualizar Rendimiento Proveedor");
+        TransportistaRutaBut1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TransportistaRutaBut1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(TransportistaRutaBut1);
 
         ReturnBut.setText("Retroceder");
         ReturnBut.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +116,10 @@ public class UserForm extends javax.swing.JFrame {
         new AsignarTransportistaRuta().setVisible(true);
     }//GEN-LAST:event_TransportistaRutaButActionPerformed
 
+    private void TransportistaRutaBut1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransportistaRutaBut1ActionPerformed
+        new ActRendimientoProveedor().setVisible(true);
+    }//GEN-LAST:event_TransportistaRutaBut1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -149,6 +162,7 @@ public class UserForm extends javax.swing.JFrame {
     private javax.swing.JButton PedClienteBut;
     private javax.swing.JButton ReturnBut;
     private javax.swing.JButton TransportistaRutaBut;
+    private javax.swing.JButton TransportistaRutaBut1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

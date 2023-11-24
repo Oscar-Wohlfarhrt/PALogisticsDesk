@@ -8,6 +8,7 @@ import com.EnderFire.PALogisticsDesk.Utils.GenericEntity;
 import com.EnderFire.PALogisticsDesk.Utils.TableData;
 import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,17 +30,46 @@ public class RendimientoProveedor implements Serializable, GenericEntity {
     @TableHeader(name = "ID", columnSize = 50)
     private Long id;
     @TableHeader(name = "Calidad de producto",columnSize = 200)
-    private Float productQuality;
+    private Float productQuality=0f;
     @TableHeader(name = "Entregas a Tiempo",columnSize = 200)
-    private Float inTimeP;//P=porcentaje
+    private Float inTimeP=0f;//P=porcentaje
     @TableHeader(name = "Errores de envio",columnSize = 200)
-    private Float deliveryErrorsP;//P=porcentaje
+    private Float deliveryErrorsP=0f;//P=porcentaje
     
-    @OneToOne(targetEntity = Proveedor.class)
+    @OneToOne(targetEntity = Proveedor.class,cascade = CascadeType.ALL)
     //@JoinColumn
     @TableHeader(name = "Proveedor",columnSize = 200)
     private Proveedor supplier;
 
+    public Float getDeliveryErrors() {
+        return deliveryErrorsP;
+    }
+
+    public Float getInTime() {
+        return inTimeP;
+    }
+
+    public Float getProductQuality() {
+        return productQuality;
+    }
+
+    public void setDeliveryErrors(Float deliveryErrorsP) {
+        this.deliveryErrorsP = deliveryErrorsP;
+    }
+
+    public void setInTime(Float inTimeP) {
+        this.inTimeP = inTimeP;
+    }
+
+    public void setProductQuality(Float productQuality) {
+        this.productQuality = productQuality;
+    }
+    
+    public void setSupplier(Proveedor supplier) {
+        this.supplier = supplier;
+    }
+
+    
     public Long getId() {
         return id;
     }

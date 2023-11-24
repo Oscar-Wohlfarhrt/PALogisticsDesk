@@ -56,6 +56,15 @@ public class Proveedor implements Serializable, GenericEntity {
     @OneToMany(targetEntity = Contrato.class, cascade = CascadeType.ALL)
     private List<Contrato> contratos = new ArrayList<>();
 
+    public RendimientoProveedor getPerformance() {
+        return performance;
+    }
+
+    public void setPerformance(RendimientoProveedor performance) {
+        this.performance = performance;
+    }
+    
+    
     public Long getId() {
         return id;
     }
