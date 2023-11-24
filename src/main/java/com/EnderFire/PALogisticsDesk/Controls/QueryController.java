@@ -38,7 +38,7 @@ public class QueryController {
                 count++;
             }
         }
-        entityManager.close();
+        
         return count;
     }
 
@@ -51,7 +51,7 @@ public class QueryController {
                 count++;
             }
         }
-        entityManager.close();
+        
         return count;
     }
 
@@ -64,7 +64,7 @@ public class QueryController {
                 count++;
             }
         }
-        entityManager.close();
+        
         return count;
     }
 
@@ -84,7 +84,7 @@ public class QueryController {
                 count++;
             }
         }
-        entityManager.close();
+        
         return count;
     }
 
