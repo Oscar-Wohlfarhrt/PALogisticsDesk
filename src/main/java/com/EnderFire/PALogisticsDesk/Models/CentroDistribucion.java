@@ -9,12 +9,16 @@ import com.EnderFire.PALogisticsDesk.Utils.TableData;
 import com.EnderFire.PALogisticsDesk.Utils.TableHeader;
 import java.io.Serializable;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -37,6 +41,10 @@ public class CentroDistribucion implements Serializable, GenericEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Ubicacion location;
+    
+    @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "crentroDistribucion_id"),inverseJoinColumns = @JoinColumn(name = "mercancia_id") )
+    private List<Mercancia> mercancias = new ArrayList<>();
 
     public Long getId() {
         return id;
