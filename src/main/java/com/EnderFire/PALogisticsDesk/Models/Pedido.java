@@ -44,6 +44,10 @@ public class Pedido implements Serializable, GenericEntity {
     @TableHeader(name = "Direccion de entrega", columnSize = 200)
     private String deliveryAddress = "Unknown";
 
+    public EstadosPedido getState() {
+        return state;
+    }
+
     @TableHeader(name = "Id de Cliente", columnSize = 200)
     @ManyToOne(targetEntity = Cliente.class)
     private Cliente client;
