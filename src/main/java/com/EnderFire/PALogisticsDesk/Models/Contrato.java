@@ -34,7 +34,7 @@ public class Contrato implements Serializable, GenericEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @TableHeader(name = "Proveedor",columnSize = 200)
-    private Proveedor proveedor;
+    private Proveedor suplier;
 
     public Long getId() {
         return id;

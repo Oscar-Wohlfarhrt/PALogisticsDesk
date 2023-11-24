@@ -46,14 +46,14 @@ public class Proveedor implements Serializable, GenericEntity {
     @ManyToMany
     private List<Mercancia> merch;
     //Rendimiento(relacion 3)
-    @OneToOne(mappedBy = "supplier",targetEntity = RendimientoProveedor.class, cascade = CascadeType.ALL)/*rendimiento proveedor*/
+    @OneToOne(mappedBy = "suplier",targetEntity = RendimientoProveedor.class, cascade = CascadeType.ALL)/*rendimiento proveedor*/
     @TableHeader(name = "Rendimiento de Proveedor",columnSize = 200)
     private RendimientoProveedor performance;
     //OrdenCompra un proveedor muchas ordenes(relacion 4)
     @OneToMany(mappedBy = "suplier",targetEntity = OrdenCompra.class, cascade = CascadeType.ALL)
     List<OrdenCompra> order = new ArrayList<>();
     //Contrato(relacion5)
-    @OneToMany(mappedBy = "proveedor",targetEntity = Contrato.class, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "suplier",targetEntity = Contrato.class, cascade = CascadeType.ALL)
     private List<Contrato> contratos = new ArrayList<>();
 
     public RendimientoProveedor getPerformance() {
