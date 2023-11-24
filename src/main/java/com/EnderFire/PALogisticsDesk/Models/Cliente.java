@@ -39,7 +39,7 @@ public class Cliente implements Serializable, GenericEntity {
     private String name;
 
     @OneToMany(targetEntity = Preferencia.class, cascade = CascadeType.ALL)
-    List<Preferencia> preferencias = new ArrayList<>();
+    private List<Preferencia> preferencias = new ArrayList<>();
 
     @OneToMany(targetEntity = Pedido.class, cascade = CascadeType.ALL)
     private List<Pedido> pedidos = new ArrayList<>();

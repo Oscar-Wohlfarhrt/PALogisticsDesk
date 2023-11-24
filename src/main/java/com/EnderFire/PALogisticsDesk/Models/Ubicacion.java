@@ -39,7 +39,7 @@ public class Ubicacion implements Serializable, GenericEntity {
     @OneToMany(mappedBy = "location")
     private List<Pedido> pedidos =  new ArrayList<>();
     
-    
+    //Amacen , CentroDistribucion y Ruta tiene relaciones unidireccionales con Ubicacion
 
     public Long getId() {
         return id;

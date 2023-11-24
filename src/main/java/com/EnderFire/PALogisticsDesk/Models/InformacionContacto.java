@@ -36,6 +36,8 @@ public class InformacionContacto implements Serializable, GenericEntity {
     
     @OneToOne(targetEntity = Cliente.class)
     private Cliente client;
+    
+    //puede que flate la relacion bidireccional con proveedor o puede que tenga que eliminar el 1a1 con cliente
 
     public Long getId() {
         return id;

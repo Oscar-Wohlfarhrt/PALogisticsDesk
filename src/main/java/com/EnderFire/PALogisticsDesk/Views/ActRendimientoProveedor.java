@@ -170,7 +170,7 @@ public class ActRendimientoProveedor extends javax.swing.JFrame {
             if(ren==null){
                 ErrorLabel.setText("El proveedor no posee rendimiento aun");
                 ren = new RendimientoProveedor();
-                ren.setSupplier(proveedores.get(index));
+                ren.setProveedor(proveedores.get(index));
                 proveedores.get(index).setPerformance(ren);
             }
             

@@ -37,9 +37,8 @@ public class RendimientoProveedor implements Serializable, GenericEntity {
     private Float deliveryErrorsP=0f;//P=porcentaje
     
     @OneToOne(targetEntity = Proveedor.class,cascade = CascadeType.ALL)
-    //@JoinColumn
     @TableHeader(name = "Proveedor",columnSize = 200)
-    private Proveedor supplier;
+    private Proveedor proveedor;//estaba como suplier
 
     public Float getDeliveryErrors() {
         return deliveryErrorsP;
@@ -65,8 +64,8 @@ public class RendimientoProveedor implements Serializable, GenericEntity {
         this.productQuality = productQuality;
     }
     
-    public void setSupplier(Proveedor supplier) {
-        this.supplier = supplier;
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 
     
@@ -100,6 +99,6 @@ public class RendimientoProveedor implements Serializable, GenericEntity {
 
     @Override
     public String toString() {
-        return String.format("[%d] Rendimiento de %s", id, supplier.getName());
+        return String.format("[%d] Rendimiento de %s", id, proveedor.getName());
     }
 }

@@ -97,7 +97,7 @@ public class Proveedor implements Serializable, GenericEntity {
         }
         return true;
     }
-
+    
     @Override
     public String toString() {
         return String.format("[%d] %s", id, name);

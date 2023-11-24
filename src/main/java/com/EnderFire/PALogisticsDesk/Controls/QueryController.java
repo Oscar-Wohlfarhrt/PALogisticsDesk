@@ -46,6 +46,7 @@ public class QueryController {
                 count++;
             }
         }
+        entityManager.close();
         return count;
     }
 
@@ -60,6 +61,7 @@ public class QueryController {
                 count++;
             }
         }
+        entityManager.close();
         return count;
     }
 
@@ -74,12 +76,17 @@ public class QueryController {
                 count++;
             }
         }
+        entityManager.close();
         return count;
     }
-/**
- * Esta funcion la proceso en java solo para mostrar que se puede filtrar aca pero tranquilamente podria traer solo los EnCamino o directamente el numero pero es un tp de POO
- * @return Integer
- */
+
+    /**
+     * Esta funcion la proceso en java solo para mostrar que se puede filtrar
+     * aca pero tranquilamente podria traer solo los EnCamino o directamente el
+     * numero pero es un tp de POO
+     *
+     * @return Integer
+     */
     public Integer informePedidosEC() {
         EntityManager entityManager = GenericJpaController.getEMF().createEntityManager();
         DAO dao = new DAO(entityManager);
@@ -91,7 +98,33 @@ public class QueryController {
                 count++;
             }
         }
+        entityManager.close();
         return count;
     }
 
+    public Float informeCostosTotalesTansoportistas() {
+        EntityManager entityManager = GenericJpaController.getEMF().createEntityManager();
+        DAO dao = new DAO(entityManager);
+        Float costos = 0f;
+        List<Transportista> resultados = dao.obtenerTodosTransportistas();
+        for(Transportista t: resultados){
+            costos += t.getCosts();
+        }
+        entityManager.close();
+        return costos;
+    }
+    
+        public Float informeSalariosTotalesTansoportistas() {
+        EntityManager entityManager = GenericJpaController.getEMF().createEntityManager();
+        DAO dao = new DAO(entityManager);
+        Float salario = 0f;
+        List<Transportista> resultados = dao.obtenerTodosTransportistas();
+        for(Transportista t: resultados){
+            salario += t.getSalary();
+        }
+        entityManager.close();
+        return salario;
+    }
+        
+        
 }

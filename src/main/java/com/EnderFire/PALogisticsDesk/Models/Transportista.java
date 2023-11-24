@@ -42,14 +42,14 @@ public class Transportista implements Serializable, GenericEntity {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @TableHeader(name = "Ruta Asignada",columnSize = 200)
-    private Ruta rutas;
+    private Ruta ruta;
 
     public void setRuta(Ruta ruta) {
-        this.rutas = ruta;
+        this.ruta = ruta;
     }
 
     public Ruta getRuta() {
-        return rutas;
+        return ruta;
     }
 
     public Long getId() {
@@ -67,6 +67,15 @@ public class Transportista implements Serializable, GenericEntity {
         return hash;
     }
 
+    public Float getCosts() {
+        return costs;
+    }
+
+    public Float getSalary() {
+        return salary;
+    }
+
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
