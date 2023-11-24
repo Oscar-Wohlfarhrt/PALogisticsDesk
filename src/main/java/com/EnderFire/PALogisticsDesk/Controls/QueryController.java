@@ -76,7 +76,10 @@ public class QueryController {
         }
         return count;
     }
-
+/**
+ * Esta funcion la proceso en java solo para mostrar que se puede filtrar aca pero tranquilamente podria traer solo los EnCamino o directamente el numero pero es un tp de POO
+ * @return Integer
+ */
     public Integer informePedidosEC() {
         EntityManager entityManager = GenericJpaController.getEMF().createEntityManager();
         DAO dao = new DAO(entityManager);
