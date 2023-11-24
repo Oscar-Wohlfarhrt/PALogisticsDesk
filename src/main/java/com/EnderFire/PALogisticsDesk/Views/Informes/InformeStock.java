@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.EnderFire.PALogisticsDesk.Views;
+package com.EnderFire.PALogisticsDesk.Views.Informes;
 
 import com.EnderFire.PALogisticsDesk.Controls.GenericJpaController;
 import com.EnderFire.PALogisticsDesk.Models.*;
@@ -16,22 +16,22 @@ import javax.swing.DefaultListModel;
  *
  * @author Oscar
  */
-public class TransportistaPorRuta extends javax.swing.JFrame {
+public class InformeStock extends javax.swing.JFrame {
 
-    GenericJpaController<Ruta> cJPA = new GenericJpaController<>(Ruta.class);
-    DefaultComboBoxModel<String> rutModel = new DefaultComboBoxModel<>();
-    DefaultListModel<String> transModel = new DefaultListModel<>();
-    List<Ruta> ruta;
+    GenericJpaController<Almacen> aJPA = new GenericJpaController<>(Almacen.class);
+    DefaultComboBoxModel<String> almModel = new DefaultComboBoxModel<>();
+    DefaultListModel<String> mercModel = new DefaultListModel<>();
+    List<Almacen> almacen;
     
     /**
      * Creates new form InformePedidos
      */
-    public TransportistaPorRuta() {
+    public InformeStock() {
         initComponents();
-        ruta=cJPA.findEntityEntities();
-        rutModel.addAll(ruta.stream().map(c-> c.toString()).toList());
-        ComboCliente.setModel(rutModel);
-        ListaPedidos.setModel(transModel);
+        almacen=aJPA.findEntityEntities();
+        almModel.addAll(almacen.stream().map(c-> c.toString()).toList());
+        ComboCliente.setModel(almModel);
+        ListaPedidos.setModel(mercModel);
     }
 
     /**
@@ -59,10 +59,10 @@ public class TransportistaPorRuta extends javax.swing.JFrame {
             }
         });
 
-        ClienteLabel.setText("Ruta");
+        ClienteLabel.setText("Almacen");
 
         TitleLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        TitleLabel.setText("Informes por Ruta");
+        TitleLabel.setText("Informes de Mercancia");
 
         ListaPedidos.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -71,7 +71,7 @@ public class TransportistaPorRuta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(ListaPedidos);
 
-        PedidosLabel.setText("Tansportistas de la Ruta");
+        PedidosLabel.setText("Mercancia del almacen");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,7 +89,7 @@ public class TransportistaPorRuta extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TitleLabel)
                             .addComponent(PedidosLabel))
-                        .addGap(0, 243, Short.MAX_VALUE)))
+                        .addGap(0, 208, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -114,9 +114,9 @@ public class TransportistaPorRuta extends javax.swing.JFrame {
     private void ComboClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboClienteActionPerformed
         int index = ComboCliente.getSelectedIndex();
         
-        if(index>=0 && index<ruta.size()){
-            transModel.clear();
-            transModel.addAll(ruta.get(index).getTrans().stream().map(p->p.toString()).toList());
+        if(index>=0 && index<almacen.size()){
+            mercModel.clear();
+            mercModel.addAll(almacen.get(index).getMercancias().stream().map(p->p.toString()).toList());
         }
     }//GEN-LAST:event_ComboClienteActionPerformed
 
@@ -137,14 +137,18 @@ public class TransportistaPorRuta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TransportistaPorRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformeStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TransportistaPorRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformeStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TransportistaPorRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformeStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TransportistaPorRuta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformeStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -153,7 +157,7 @@ public class TransportistaPorRuta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TransportistaPorRuta().setVisible(true);
+                new InformeStock().setVisible(true);
             }
         });
     }

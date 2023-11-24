@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.EnderFire.PALogisticsDesk.Views;
+package com.EnderFire.PALogisticsDesk.Views.User;
 
 import com.EnderFire.PALogisticsDesk.Controls.GenericJpaController;
 import com.EnderFire.PALogisticsDesk.Models.*;
@@ -58,7 +58,7 @@ public class ActRendimientoProveedor extends javax.swing.JFrame {
         EnviosSpinner = new javax.swing.JSpinner();
         ErrorLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         TitleLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         TitleLabel.setText("Actualizar Rendimiento de Proveedor");

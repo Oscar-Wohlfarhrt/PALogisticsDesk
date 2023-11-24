@@ -8,6 +8,10 @@ import com.EnderFire.PALogisticsDesk.Models.*;
 import javax.swing.JOptionPane;
 import com.EnderFire.PALogisticsDesk.Controls.DAO;
 import com.EnderFire.PALogisticsDesk.Controls.QueryController;
+import com.EnderFire.PALogisticsDesk.Views.Informes.InformeProveedor;
+import com.EnderFire.PALogisticsDesk.Views.Informes.InformeStock;
+import com.EnderFire.PALogisticsDesk.Views.Informes.TransportistaPorRuta;
+import com.EnderFire.PALogisticsDesk.Views.UserSelectForm;
 
 /**
  *

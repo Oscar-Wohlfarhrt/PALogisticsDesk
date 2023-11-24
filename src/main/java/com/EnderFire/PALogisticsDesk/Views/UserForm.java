@@ -4,6 +4,11 @@
  */
 package com.EnderFire.PALogisticsDesk.Views;
 
+import com.EnderFire.PALogisticsDesk.Views.User.AsignarTransportistaRuta;
+import com.EnderFire.PALogisticsDesk.Views.User.PedidosCliente;
+import com.EnderFire.PALogisticsDesk.Views.User.ActRendimientoProveedor;
+import com.EnderFire.PALogisticsDesk.Views.User.MercanciaAlmacen;
+import com.EnderFire.PALogisticsDesk.Views.User.MercanciaCentroDistribucion;
 import com.EnderFire.PALogisticsDesk.Models.*;
 
 /**
@@ -32,7 +37,9 @@ public class UserForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         PedClienteBut = new javax.swing.JButton();
         TransportistaRutaBut = new javax.swing.JButton();
-        TransportistaRutaBut1 = new javax.swing.JButton();
+        RendimientoProveedor = new javax.swing.JButton();
+        MercanciaAlmacen = new javax.swing.JButton();
+        MercanciaCentroDistribucion = new javax.swing.JButton();
         ReturnBut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,7 +48,7 @@ public class UserForm extends javax.swing.JFrame {
         jLabel1.setText("User Menu");
 
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.setLayout(new java.awt.GridLayout(4, 4, 5, 5));
+        jPanel1.setLayout(new java.awt.GridLayout(5, 4, 5, 5));
 
         PedClienteBut.setText("Pedidos por Clientes");
         PedClienteBut.addActionListener(new java.awt.event.ActionListener() {
@@ -59,13 +66,29 @@ public class UserForm extends javax.swing.JFrame {
         });
         jPanel1.add(TransportistaRutaBut);
 
-        TransportistaRutaBut1.setText("Actualizar Rendimiento Proveedor");
-        TransportistaRutaBut1.addActionListener(new java.awt.event.ActionListener() {
+        RendimientoProveedor.setText("Actualizar Rendimiento Proveedor");
+        RendimientoProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TransportistaRutaBut1ActionPerformed(evt);
+                RendimientoProveedorActionPerformed(evt);
             }
         });
-        jPanel1.add(TransportistaRutaBut1);
+        jPanel1.add(RendimientoProveedor);
+
+        MercanciaAlmacen.setText("Asignar Mercancia a Almacen");
+        MercanciaAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MercanciaAlmacenActionPerformed(evt);
+            }
+        });
+        jPanel1.add(MercanciaAlmacen);
+
+        MercanciaCentroDistribucion.setText("Asignar Mercancia a Centros de Distribución");
+        MercanciaCentroDistribucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MercanciaCentroDistribucionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(MercanciaCentroDistribucion);
 
         ReturnBut.setText("Retroceder");
         ReturnBut.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +106,7 @@ public class UserForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ReturnBut, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -116,9 +139,17 @@ public class UserForm extends javax.swing.JFrame {
         new AsignarTransportistaRuta().setVisible(true);
     }//GEN-LAST:event_TransportistaRutaButActionPerformed
 
-    private void TransportistaRutaBut1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransportistaRutaBut1ActionPerformed
+    private void RendimientoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RendimientoProveedorActionPerformed
         new ActRendimientoProveedor().setVisible(true);
-    }//GEN-LAST:event_TransportistaRutaBut1ActionPerformed
+    }//GEN-LAST:event_RendimientoProveedorActionPerformed
+
+    private void MercanciaAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MercanciaAlmacenActionPerformed
+        new MercanciaAlmacen().setVisible(true);
+    }//GEN-LAST:event_MercanciaAlmacenActionPerformed
+
+    private void MercanciaCentroDistribucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MercanciaCentroDistribucionActionPerformed
+        new MercanciaCentroDistribucion().setVisible(true);
+    }//GEN-LAST:event_MercanciaCentroDistribucionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,10 +190,12 @@ public class UserForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton MercanciaAlmacen;
+    private javax.swing.JButton MercanciaCentroDistribucion;
     private javax.swing.JButton PedClienteBut;
+    private javax.swing.JButton RendimientoProveedor;
     private javax.swing.JButton ReturnBut;
     private javax.swing.JButton TransportistaRutaBut;
-    private javax.swing.JButton TransportistaRutaBut1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

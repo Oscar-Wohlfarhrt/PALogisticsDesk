@@ -54,6 +54,7 @@ public class Pedido implements Serializable, GenericEntity {
 
     @ManyToOne
     @JoinColumn
+    @TableHeader(name = "Ubicacion",columnSize = 200)
     private Ubicacion location;
 
     @ManyToMany

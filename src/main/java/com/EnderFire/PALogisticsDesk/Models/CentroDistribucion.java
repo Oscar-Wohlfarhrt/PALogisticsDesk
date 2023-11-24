@@ -40,6 +40,7 @@ public class CentroDistribucion implements Serializable, GenericEntity {
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
+    @TableHeader(name = "Ubicacion",columnSize = 200)
     private Ubicacion location;
     
     @ManyToMany
@@ -54,6 +55,10 @@ public class CentroDistribucion implements Serializable, GenericEntity {
         this.id = id;
     }
 
+    public List<Mercancia> getMercancias() {
+        return mercancias;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

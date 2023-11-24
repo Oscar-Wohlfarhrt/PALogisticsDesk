@@ -4,7 +4,7 @@
  */
 package com.EnderFire.PALogisticsDesk;
 
-import com.EnderFire.PALogisticsDesk.Views.TableViewForm;
+import com.EnderFire.PALogisticsDesk.Views.Admin.TableViewForm;
 import com.EnderFire.PALogisticsDesk.Controls.*;
 import com.EnderFire.PALogisticsDesk.Models.*;
 

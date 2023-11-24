@@ -53,7 +53,6 @@ public class Almacen implements Serializable, GenericEntity {
     public void setId(Long id) {
         this.id = id;
     }
-
     @Override
     public int hashCode() {
         int hash = 0;
