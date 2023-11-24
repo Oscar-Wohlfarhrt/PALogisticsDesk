@@ -83,6 +83,10 @@ public class Pedido implements Serializable, GenericEntity {
     public void setClient(Cliente client) {
         this.client = client;
     }
+    
+    public String toDetailedString(){
+        return String.format("<html>%s<br>Ubicacion: %s</html>",toString(),location!=null?location.toDetailedString():"No tiene ubicacion asignada");
+    }
 
     @Override
     public int hashCode() {

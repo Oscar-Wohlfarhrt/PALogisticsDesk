@@ -44,6 +44,14 @@ public class Transportista implements Serializable, GenericEntity {
     @TableHeader(name = "Ruta Asignada",columnSize = 200)
     private Ruta rutas;
 
+    public void setRuta(Ruta ruta) {
+        this.rutas = ruta;
+    }
+
+    public Ruta getRuta() {
+        return rutas;
+    }
+
     public Long getId() {
         return id;
     }
