@@ -50,7 +50,7 @@ public class InformePedidos extends javax.swing.JFrame {
         ListaPedidos = new javax.swing.JList<>();
         PedidosLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         ComboCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ComboCliente.addActionListener(new java.awt.event.ActionListener() {
