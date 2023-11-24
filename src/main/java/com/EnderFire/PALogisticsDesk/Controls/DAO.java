@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.EnderFire.PALogisticsDesk.Controls;
-
+//esto no se usa, esta al pedo pero dentro de todo funciona
 import com.EnderFire.PALogisticsDesk.Models.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +34,13 @@ public class DAO {
         TypedQuery<Transportista> consulta = entityManager.createQuery(jpql, Transportista.class);
         return consulta.getResultList();
     }
-
+@Deprecated
     public List<Proveedor> obtenerTodosProveedores() {
         String jpql = "SELECT p FROM Proveedor p";
         TypedQuery<Proveedor> consulta = entityManager.createQuery(jpql, Proveedor.class);
         return consulta.getResultList();
     }
-
+@Deprecated
     public List<RendimientoProveedor> obtenerTodosRendimientoProveedores() {
         String jpql = "SELECT rp FROM RendimientoProveedor rp";
         TypedQuery<RendimientoProveedor> consulta = entityManager.createQuery(jpql, RendimientoProveedor.class);
@@ -53,24 +53,32 @@ public class DAO {
      * @param proveedor
      * @return RendimientoProveedor
      */
+    @Deprecated
     public RendimientoProveedor obtenerRendimientoPorProveedor(Proveedor proveedor) {
-        String jpql = "SELECT rp FROM RendimientoProveedor rp WHERE rp.proveedor = :proveedor";
+        String jpql = "SELECT rp FROM RendimientoProveedor rp WHERE rp.suplier = :proveedor";
         TypedQuery<RendimientoProveedor> consulta = entityManager.createQuery(jpql, RendimientoProveedor.class);
         consulta.setParameter("proveedor", proveedor);
         List<RendimientoProveedor> resultados = consulta.getResultList();
         return resultados.isEmpty() ? null : resultados.get(0);
     }
-
+@Deprecated
     public List<Ruta> obtenerTodosRutas() {
         String jpql = "SELECT rp FROM RendimientoProveedor rp";
         TypedQuery<Ruta> consulta = entityManager.createQuery(jpql, Ruta.class);
         return consulta.getResultList();
     }
-    
+    @Deprecated
     public List<Transportista> obtenerTransportitasPorRuta(Ruta ruta){
         String jpql = "SELECT trp FROM Transportista trp WHERE trp.ruta = :ruta";
         TypedQuery<Transportista> consulta = entityManager.createQuery(jpql, Transportista.class);
         consulta.setParameter("ruta", ruta);
+        return consulta.getResultList();
+    }
+    @Deprecated
+    public List<Mercancia> obtenerMercanciasEnAlmcen(Mercancia mercancia){
+        String jpql = "SELECT alm FROM Almacen alm WHERE alm.mercancias = :mercancia";
+        TypedQuery<Mercancia> consulta = entityManager.createQuery(jpql, Mercancia.class);
+        consulta.setParameter("mercancia", mercancia);
         return consulta.getResultList();
     }
     

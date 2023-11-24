@@ -73,6 +73,10 @@ public class Ruta implements Serializable, GenericEntity {
         return true;
     }
 
+    public List<Transportista> getTrans() {
+        return trans;
+    }
+
     @Override
     public String toString() {
         return String.format("[%d] %s", id, description);

@@ -61,6 +61,10 @@ public class Almacen implements Serializable, GenericEntity {
         return hash;
     }
 
+    public List<Mercancia> getMercancias() {
+        return mercancias;
+    }
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set

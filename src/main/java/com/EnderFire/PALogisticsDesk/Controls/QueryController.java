@@ -29,7 +29,7 @@ public class QueryController {
     }
 
     //INFORME DE PEDIDOS
-    public static Integer informePedidosND() {
+    public Integer informePedidosND() {
         GenericJpaController<Pedido> pJPA = new GenericJpaController<>(Pedido.class);
         Integer count = 0;
         List<Pedido> resultados = pJPA.findEntityEntities();
@@ -38,11 +38,11 @@ public class QueryController {
                 count++;
             }
         }
-        
+
         return count;
     }
 
-    public static Integer informePedidosD() {
+    public Integer informePedidosD() {
         GenericJpaController<Pedido> pJPA = new GenericJpaController<>(Pedido.class);
         Integer count = 0;
         List<Pedido> resultados = pJPA.findEntityEntities();
@@ -51,11 +51,11 @@ public class QueryController {
                 count++;
             }
         }
-        
+
         return count;
     }
 
-    public static Integer informePedidosE() {
+    public Integer informePedidosE() {
         GenericJpaController<Pedido> pJPA = new GenericJpaController<>(Pedido.class);
         Integer count = 0;
         List<Pedido> resultados = pJPA.findEntityEntities();
@@ -64,17 +64,10 @@ public class QueryController {
                 count++;
             }
         }
-        
+
         return count;
     }
 
-    /**
-     * Esta funcion la proceso en java solo para mostrar que se puede filtrar
-     * aca pero tranquilamente podria traer solo los EnCamino o directamente el
-     * numero pero es un tp de POO
-     *
-     * @return Integer
-     */
     public Integer informePedidosEC() {
         GenericJpaController<Pedido> pJPA = new GenericJpaController<>(Pedido.class);
         Integer count = 0;
@@ -84,7 +77,7 @@ public class QueryController {
                 count++;
             }
         }
-        
+
         return count;
     }
 
@@ -93,24 +86,36 @@ public class QueryController {
         DAO dao = new DAO(entityManager);
         Float costos = 0f;
         List<Transportista> resultados = dao.obtenerTodosTransportistas();
-        for(Transportista t: resultados){
+        for (Transportista t : resultados) {
             costos += t.getCosts();
         }
         entityManager.close();
         return costos;
     }
-    
-        public Float informeSalariosTotalesTansoportistas() {
+
+    public Float informeSalariosTotalesTansoportistas() {
         EntityManager entityManager = GenericJpaController.getEMF().createEntityManager();
         DAO dao = new DAO(entityManager);
         Float salario = 0f;
         List<Transportista> resultados = dao.obtenerTodosTransportistas();
-        for(Transportista t: resultados){
+        for (Transportista t : resultados) {
             salario += t.getSalary();
         }
         entityManager.close();
         return salario;
     }
-        
-        
+
+    public Integer informeRutas() {
+        GenericJpaController<Ruta> pJPA = new GenericJpaController<>(Ruta.class);
+        EntityManager entityManager = GenericJpaController.getEMF().createEntityManager();
+        DAO dao = new DAO(entityManager);
+        Integer count = 0;
+        List<Ruta> resultados = pJPA.findEntityEntities();
+        List<Transportista> transportistas = new ArrayList<>();
+        for (Ruta r : resultados) {
+            transportistas = dao.obtenerTransportitasPorRuta(r);
+        }
+        return count;
+    }
+
 }

@@ -59,6 +59,12 @@ public class Proveedor implements Serializable, GenericEntity {
     public RendimientoProveedor getPerformance() {
         return performance;
     }
+    
+    public List<RendimientoProveedor> getPerformanceInList() {
+        List<RendimientoProveedor> rp = new ArrayList<>();
+        rp.add(performance);
+        return rp;
+    }
 
     public void setPerformance(RendimientoProveedor performance) {
         this.performance = performance;

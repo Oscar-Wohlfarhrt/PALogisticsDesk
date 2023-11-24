@@ -101,4 +101,8 @@ public class RendimientoProveedor implements Serializable, GenericEntity {
     public String toString() {
         return String.format("[%d] Rendimiento de %s", id, suplier.getName());
     }
+    
+    public String toDetailedString(){
+        return String.format("<html>Calidad de productos: %3.2f%%<br>Entregas a tiempo: %3.2f%%<br>Errores de envio: %3.2f%%</html>", this.productQuality,this.inTimeP,deliveryErrorsP);
+    }
 }
